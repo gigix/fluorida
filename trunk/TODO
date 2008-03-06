@@ -1,0 +1,51 @@
+===== FEATURES =====
+
+Seperate test script from hard code (done)
+Display full error/failure information in result report (done)
+Mimic FlexUnit's UI (done)
+Action: verifyText (done)
+Action: waitForElementProperty (done)
+Action: verifyElementProperty (done)
+Action: type (done)
+Action: select (done)
+Specify test suite in Tester UI (done)
+"Run" button (done)
+Action: mouseOver and mouseOut (done)
+Action: dragAndDrop (done)
+Action: doubleClick (done)
+Action: clickAt (done)
+Regexp in verifyElementProperty/waitForElementProperty (done)
+Fail test when time outs, instead of throw exception to UI (done)
+Action:	setTimeout (done)
+Show "all tests" in Tester UI (done)
+Specify test suite from containing HTML (done)
+
+Specify "autorun" from containing HTML
+Support css locator
+More actions:
+	sleep
+	...
+How to exit and generate text-based report automatically?
+More indicative error message from verifyElementProperty
+
+
+===== DEFECTS =====
+
+Action "select" sometimes hangs up and times out without triggering CLOSE event (done)
+
+DragAndDrop should bring data in DragSource
+
+
+===== HOUSE CLEAN =====
+
+FlexUnit tests (done)
+Refactor action creation logic (done)
+Re-organize test scripts, split test cases for various actions (done)
+Release script (done)
+Test in web env. (done)
+
+Rename project to "Fluorida"
+Migrate project to sourceforge
+"Dogfood" tests
+Cleanup TestLoader
+Is it possible (and/or necessary) to have parrel verify/waitFor actions?
