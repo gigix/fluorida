@@ -6,15 +6,4 @@ Fluorida is a Flex/Flash functional testing tool. It manipulates Flash just as r
 
 Version 0.0.1 is the first preview release. The main purpose is to gather feedbacks from the community. So far Fluorida has a basic "Tester" UI and it runs both locally and in web environment. It supports some fundamental actions. Check out the [http://fluorida.thoughtworkers.org/tester/open?suite=default.fls online demo] and [http://code.google.com/p/fluorida/wiki/GettingStarted get started here].
 
-
-
-
-So far it supports basic elements in Stomp protocol: CONNECT, DISCONNECT, SUBSCRIBE, UNSUBSCRIBE, SEND and RECEIPT. It passes acceptance tests built with both Java and Perl clients. That's why I consider it as "usable" and decide to announce it.
-
-To give Stomperl a try (NOTE: EUnit later than 2.0 beta is required):
-
-   1. Check it out with Subversion: svn checkout http://stomperl.googlecode.com/svn/tags/0.0.1/ stomperl-0.0.1
-   2. Kick off the broker: make startup
-   3. Now you can connect to the broker at port 61613. However I suggest you run the test suite first: make test
-
-What's next? I suppose Stomperl will support full Stomp protocol in its 0.0.2 version, along with a better test coverage. We will do more acceptance test, compatibility test and performance test in the future. But first, any suggestion and feedback would be highly appreciated. 
+What's next? It really depends on the feedback. We have a couple of things remaining on our [http://code.google.com/p/fluorida/source/browse/trunk/TODO TODO list], however the future direction is largely undecided yet. We are willing to see how people use it and figure out what to do in following releases. Therefore, your suggestion and feedback would be highly appreciated. 
