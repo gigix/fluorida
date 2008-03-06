@@ -73,4 +73,4 @@ A Fluorine *test case* (`*.flt`) is yet-another-plain-old-text-file. Each row in
 |verifyText|helloText|hi there|
 }}}
 
-Before we come up to more detailed reference documentation, please refer to [http://code.google.com/p/fluorida/source/browse/trunk/test/sample our samples] when you write your own tests.
+Before we come up to more sophisticated reference documentation, please refer to [http://code.google.com/p/fluorida/source/browse/trunk/test/sample our samples] when you write your own tests.
