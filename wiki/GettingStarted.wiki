@@ -1,13 +1,53 @@
-#summary One-sentence summary of this page.
+#summary How to test your Flex application with Fluorida
 
-= Introduction =
+= Get Fluorida =
 
-Add your content here.
+Download Fluorida [http://fluorida.googlecode.com/files/Fluorida-0.0.1.zip zip package] and unzip. 
+
+That's it.
+
+Open *Tester.swf* with [http://www.adobe.com/products/flashplayer/ Adobe Flash Player], and you should see a successful test suite running.
+
+http://lh3.google.com/gigix1980/R8_HvfXatII/AAAAAAAACvM/gPJJD2vbWYM/s400/fluorida-1.PNG
 
 
-= Details =
+= Use Fluorida Locally =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Running locally, Fluorida always loads test suite from *[http://code.google.com/p/fluorida/source/browse/trunk/src/default.fls default.fls]*, which exists in the same directory along with *Tester.swf*. Edit *default.fls* to refer to your test cases.
+
+= Use Fluorida Within Website =
+
+  * Embed *Tester.swf* into a web page:
+
+{{{
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+     id="Tester" width="800" height="600"
+     codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
+ <param name="movie" value="<%= tester_swf %>" />
+ <param name="allowScriptAccess" value="always" />
+ <embed src="<%= tester_swf %>" name="Tester" align="middle" allowScriptAccess="always"
+     play="true" loop="false" type="application/x-shockwave-flash"
+	 width="800" height="600"
+     pluginspage="http://www.macromedia.com/go/getflashplayer">
+  </embed>
+</object>
+}}}
+
+  * Define `startTest()` Javascript function in the web page, this function should
+    # specify URL of test suite, then
+    # kick off test
+
+{{{
+     function startTest() {
+	     thisMovie("Tester").setTestSuite("<%= @suite_url %>");
+	     thisMovie("Tester").startTest();
+     }
+
+     function thisMovie(movieName) {
+         if (navigator.appName.indexOf("Microsoft") != -1) {
+             return window[movieName];
+         } else {
+             return document[movieName];
+         }
+     }     
+}}}
