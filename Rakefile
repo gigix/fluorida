@@ -36,6 +36,25 @@ task :release => [:default] do
   end
 end
 
+require 'net/sftp'
+task :upload_website do
+  Net::SFTP.start('fluorida.thoughtworkers.org', 'fluorida') do |sftp|
+    remote_base = "/home/fluorida/fluorida.thoughtworkers.org"
+    
+    cd WEBSITE do
+      Dir["**/*"].each do |local_path|
+        puts local_path
+        remote_path = "#{remote_base}/#{local_path}"
+        if File.directory?(local_path)
+          sftp.mkdir remote_path, {:permission => 0777} rescue nil
+        else
+          sftp.put_file local_path, remote_path
+        end
+      end
+    end
+  end  
+end
+
 task :server do 
   cd WEBSITE do
     execute "script/server"
