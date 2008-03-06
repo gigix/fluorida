@@ -18,7 +18,7 @@ Running locally, Fluorida always loads test suite from *[http://code.google.com/
 
 = Use Fluorida Within Website =
 
-  * Embed *Tester.swf* into a web page:
+  * Embed *Tester.swf* into a [http://code.google.com/p/fluorida/source/browse/trunk/website/app/views/tester/open.rhtml web page]:
 
 {{{
 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
@@ -52,3 +52,25 @@ Running locally, Fluorida always loads test suite from *[http://code.google.com/
          }
      }     
 }}}
+
+= Write Your Own Tests =
+
+A Fluorine *test suite* (`*.fls`) is a plain-old-text-file. Each row in that file represents the URL of a test case. For example:
+
+{{{
+# This is a test suite
+sample/success_case.flt
+sample/error_case.flt
+sample/fail_case.flt
+}}}
+
+A Fluorine *test case* (`*.flt`) is yet-another-plain-old-text-file. Each row in that file represents a command. A command is a vertical-bar-separated-string. The first column of a command is the *action* and others are *arguments*. For example:
+
+{{{
+# This is a successful test case
+|open|aut.swf|
+|click|helloButton|
+|verifyText|helloText|hi there|
+}}}
+
+Before we come up to more detailed reference documentation, please refer to [http://code.google.com/p/fluorida/source/browse/trunk/test/sample our samples] when you write your own tests.
