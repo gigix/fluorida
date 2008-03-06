@@ -2,15 +2,14 @@
 
 I'm glad to announce that [http://code.google.com/p/fluorida/ Fluorida] 0.0.1 (the first preview release) is out.
 
-Fluorida is a Flex/Flash functional testing tool. It manipulates Flash just as real users do. It allows testers write test cases with simple but still expressive DSL. What makes Fluorida different is that it doesn't rely on `mx.automation` package, which is only available in [http://www.adobe.com/products/flex/features/flex_builder/ Flex Builder Professional Edition]. 
+Fluorida is a Flex/Flash functional testing tool. It manipulates Flash just as real users do. It allows testers write test cases with simple but still expressive DSL. What makes Fluorida different is that it doesn't rely on `mx.automation` package, which is only available in [http://www.adobe.com/products/flex/features/flex_builder/ Flex Builder Professional Edition]. Other functional testing tools such as HP QuickTest Professional (formerly Mercury QuickTest Professional) and [http://funfx.rubyforge.org/ FunFX] depend on `mx.automation` package but fortunately it seems like that dependency is not necessary to a Flex functional testing tool -- Fluorida is the evidence.
+
+Version 0.0.1 is the first preview release. The main purpose is to gather feedbacks from the community. So far Fluorida has a basic "Tester" UI and it runs both locally and in web environment. It supports some fundamental actions. Check out the [http://fluorida.thoughtworkers.org/tester/open?suite=default.fls online demo] and [http://code.google.com/p/fluorida/wiki/GettingStarted get started here].
 
 
 
-Stomperl 0.0.1 (the first preview release) is out.
 
-Stomperl [http://code.google.com/p/stomperl/] is an implementation of Stomp [http://stomp.codehaus.org/] broker with Erlang. That means performance, scalability, reliability and elegance in concurrent programming are our goals. And since Stomp is simple enough, it's a good start point to learn Erlang/OTP programming.
-
-Version 0.0.1 is the first preview release. The main purpose is to gather feedbacks from the community. So far it supports basic elements in Stomp protocol: CONNECT, DISCONNECT, SUBSCRIBE, UNSUBSCRIBE, SEND and RECEIPT. It passes acceptance tests built with both Java and Perl clients. That's why I consider it as "usable" and decide to announce it.
+So far it supports basic elements in Stomp protocol: CONNECT, DISCONNECT, SUBSCRIBE, UNSUBSCRIBE, SEND and RECEIPT. It passes acceptance tests built with both Java and Perl clients. That's why I consider it as "usable" and decide to announce it.
 
 To give Stomperl a try (NOTE: EUnit later than 2.0 beta is required):
 
