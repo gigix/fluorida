@@ -1,0 +1,31 @@
+<html><body>
+
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+     id="Tester" width="500" height="375"
+     codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
+ <param name="movie" value="Tester.swf" />
+ <param name="allowScriptAccess" value="always" />
+ <embed src="Tester.swf" name="Tester" align="middle" allowScriptAccess="always"
+     play="true" loop="false" type="application/x-shockwave-flash"
+     pluginspage="http://www.macromedia.com/go/getflashplayer">
+  </embed>
+</object>
+
+<script>
+     function thisMovie(movieName) {
+         if (navigator.appName.indexOf("Microsoft") != -1) {
+             return window[movieName];
+         } else {
+             return document[movieName];
+         }
+     }
+     
+     function runTests() {
+	     thisMovie("Tester").setTestSuite("sample/suite.fls");
+	     thisMovie("Tester").startTest();
+     }
+</script>
+
+<input type="button" value="Run!" onclick="runTests()" />
+
+</body></html>

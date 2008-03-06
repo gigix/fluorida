@@ -1,0 +1,16 @@
+# Write your test suite here.
+# For example:
+# 
+sample/test_open.flt
+sample/test_type.flt
+sample/test_click.flt
+sample/test_click_at.flt
+sample/test_double_click.flt
+sample/test_wait_for_element_property.flt
+sample/test_select.flt
+sample/test_mouse_over_and_out.flt
+sample/test_drag_and_drop.flt
+sample/test_regexp.flt
+
+# it takes too long
+# sample/test_set_timeout.flt
