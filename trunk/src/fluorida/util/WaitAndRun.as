@@ -3,7 +3,7 @@ package fluorida.util {
 	import flash.events.TimerEvent;
 
 	public class WaitAndRun {
-		public static var defaultTimeout:int = 3;
+		public static var defaultTimeout:int = 30;
 	
 		private var _condition:Function;
 		private var _todo:Function;

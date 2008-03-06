@@ -44,8 +44,8 @@ Re-organize test scripts, split test cases for various actions (done)
 Release script (done)
 Test in web env. (done)
 Rename project to "Fluorida" (done)
+Demo website (done: http://fluorida.thoughtworkers.org/tester/open?suite=default.fls)
 
-Demo website
 "Dogfood" tests
 Cleanup TestLoader
 Is it possible (and/or necessary) to have parrel verify/waitFor actions?
