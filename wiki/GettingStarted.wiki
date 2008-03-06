@@ -1,4 +1,5 @@
 #summary How to test your Flex application with Fluorida
+#labels Featured,Phase-Deploy
 
 = Get Fluorida =
 
