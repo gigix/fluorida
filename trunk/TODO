@@ -2,10 +2,11 @@
 
 ===== FEATURES =====
 
+Action:	verifyElementPresent / waitForElementPresent (done)
+
 Specify "autorun" from containing HTML
 Support css locator
 More actions:
-	verifyElementPresent / waitForElementPresent
 	sleep
 	...
 How to exit and generate text-based report automatically?

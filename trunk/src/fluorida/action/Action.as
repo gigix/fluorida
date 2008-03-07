@@ -24,6 +24,8 @@ package fluorida.action {
 				waitForElementProperty:WaitForElementProperty,
 				verifyElementProperty:VerifyElementProperty,
 				verifyText:VerifyText,
+				verifyElementPresent:VerifyElementPresent,
+				waitForElementPresent:WaitForElementPresent,
 				open:Open
 			};
 		}
