@@ -1,3 +1,5 @@
 |open|aut.swf|
 |verifyElementPresent|css=TextInput|
 |verifyElementPresent|css=TextInput[id="helloText"]|
+|verifyElementProperty|css=*|id|helloText|
+|verifyElementProperty|css=*[id='helloText']|doubleClickEnabled|true|

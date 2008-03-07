@@ -5,8 +5,8 @@ package fluorida.locator {
 	public class Selector {
 		public static function parse(desc:String) : Selector {
 			var simpleSelectorPattern:RegExp = /^\w+$/;
-			var typeSelectorPattern:RegExp = /^css=(\w+)$/;
-			var attributeSelectorPattern:RegExp = /^css=(\w+)\[(\w+)=[\"|\'](.+)[\"|\']\]/;
+			var typeSelectorPattern:RegExp = /^css=(\w+|\*)$/;
+			var attributeSelectorPattern:RegExp = /^css=(\w+|\*)\[(\w+)=[\"|\'](.+)[\"|\']\]/;
 			
 			if(simpleSelectorPattern.test(desc)) {
 				return new SimpleSelector(desc);
