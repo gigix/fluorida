@@ -3,11 +3,18 @@
 ===== FEATURES =====
 
 Action:	verifyElementPresent / waitForElementPresent (done)
+CSS selector: simple / type / attribute (done)
 
 Specify "autorun" from containing HTML
-Support css locator
 More actions:
 	sleep
+	...
+CSS selectors:
+	universal
+	children
+	descendant
+	position
+	pseudo-classes
 	...
 How to exit and generate text-based report automatically?
 More indicative error message from verifyElementProperty

@@ -2,10 +2,12 @@ package {
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
     import flash.events.Event;
+    import flash.utils.getQualifiedClassName;
 
     import flexunit.framework.TestCase;
     import flexunit.framework.TestSuite;
 	
+	import fluorida.locator.Selector;
 	import fluorida.util.TestLoader;
 	
 	public class FluoridaTest extends TestCase {
@@ -20,6 +22,7 @@ package {
 			testSuite.addTest(new FluoridaTest("testLoadTestSuite"));
 			testSuite.addTest(new FluoridaTest("testMapAccess"));
 			testSuite.addTest(new FluoridaTest("testRegexp"));
+			testSuite.addTest(new FluoridaTest("testCreateSelector"));
             return testSuite;
         }
         
@@ -62,6 +65,21 @@ package {
 		
 		public function testRegexp() : void {
 			assertTrue(new RegExp(".?ell.*$").test("hello"));
+			var matches:Array =  /(\w+)\[(\w+)=[\"|\'](.+)[\"|\']\]/.exec("Button[id='button']");
+			assertEquals("Button", matches[1]);
+			assertEquals("id", matches[2]);
+			assertEquals("button", matches[3]);
+		}
+		
+		public function testCreateSelector() : void {
+			var selector:Selector = Selector.parse("myId");
+			assertEquals("fluorida.locator::SimpleSelector", getQualifiedClassName(selector));
+
+			selector = Selector.parse("css=Button");
+			assertEquals("fluorida.locator::TypeSelector", getQualifiedClassName(selector));
+			
+			selector = Selector.parse("css=Button[id='button']");
+			assertEquals("fluorida.locator::AttributeSelector", getQualifiedClassName(selector));
 		}
 	}
 }
