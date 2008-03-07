@@ -64,7 +64,7 @@ sample/error_case.flt
 sample/fail_case.flt
 }}}
 
-A Fluorine *test case* (`*.flt`) is yet-another-plain-old-text-file. Each row in that file represents a command. A command is a vertical-bar-separated-string. The first column of a command is the *action* and others are *arguments*. For example:
+A Fluorine *test case* (`*.flt`) is yet-another-plain-old-text-file. Each row in that file represents a command. A *command* is a vertical-bar-separated-string. The first column of a command is the *action* and others are *arguments*. For example:
 
 {{{
 # This is a successful test case
