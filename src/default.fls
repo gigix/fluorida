@@ -12,6 +12,7 @@ sample/test_mouse_over_and_out.flt
 sample/test_drag_and_drop.flt
 sample/test_regexp.flt
 sample/test_verify_element_present.flt
+sample/test_locators.flt
 
 # it takes too long
 # sample/test_set_timeout.flt

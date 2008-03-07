@@ -13,6 +13,7 @@ package fluorida.util {
 	
 	import fluorida.framework.TestResult;
 	import fluorida.framework.TestFailure;
+	import fluorida.locator.Selector;
 	
 	public class Accessor {
 		private var _application:Application = null;
@@ -65,6 +66,10 @@ package fluorida.util {
 			allTests.dataProvider = result.getTestSuite().getTestCases();
 		}
 		
+		public function enableRunSuite(enabled:Boolean = true) : void {
+			$(_application, "runSuite")["enabled"] = enabled;
+		}
+		
 		public function $$(locator:String) : DisplayObject {
 			var result:DisplayObject = $(getAut(), locator);
 			if(result == null) {
@@ -73,30 +78,14 @@ package fluorida.util {
 			return result;
 		}
 		
-		public function enableRunSuite(enabled:Boolean = true) : void {
-			$(_application, "runSuite")["enabled"] = enabled;
-		}
-		
 		private function $(container:DisplayObjectContainer, locator:String) : DisplayObject {
-			var cursor:int;
-			for(cursor = 0; cursor < container.numChildren; cursor++) {
-				var child:DisplayObject = container.getChildAt(cursor);
-				if(child.hasOwnProperty("id") && child["id"] == locator) {
-					return child;
-				}
-				if(child.name == locator) {
-					return child;	
-				}
-				var subContainer:DisplayObjectContainer = child as DisplayObjectContainer;
-				if(subContainer == null) {
-					continue;	
-				}
-				var resultInSubContainer:DisplayObject = $(subContainer, locator);
-				if(resultInSubContainer != null) {
-					return resultInSubContainer;	
-				}
+			var selector:Selector = Selector.parse(locator);
+			var result:Array = selector.select(container);
+			if(result.length == 0) {
+				return null;
+			} else {
+				return result[0];
 			}
-			return null;
 		}
 	}	
 }

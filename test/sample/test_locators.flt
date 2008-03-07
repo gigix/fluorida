@@ -1,0 +1,3 @@
+|open|aut.swf|
+|verifyElementPresent|css=TextInput|
+|verifyElementPresent|css=TextInput[id="helloText"]|
