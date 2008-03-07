@@ -4,13 +4,13 @@
 
 Action:	verifyElementPresent / waitForElementPresent (done)
 CSS selector: simple / type / attribute (done)
+CSS selector: universal (done)
 
 Specify "autorun" from containing HTML
 More actions:
 	sleep
 	...
 CSS selectors:
-	universal
 	children
 	descendant
 	position

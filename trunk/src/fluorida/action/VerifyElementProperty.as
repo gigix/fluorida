@@ -13,9 +13,9 @@ package fluorida.action {
 			var regexpPrefix:String = "regexp:";
 			if(expectedValue.indexOf(regexpPrefix) == 0) {
 				var expectedPattern:String = expectedValue.substring(regexpPrefix.length);
-				assertMatches(expectedPattern, element[propertyName]);
+				assertMatches(expectedPattern, element[propertyName].toString());
 			} else {
-				assertEquals(expectedValue, element[propertyName]);
+				assertEquals(expectedValue, element[propertyName].toString());
 			}
 		}
 	}

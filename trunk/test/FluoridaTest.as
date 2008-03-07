@@ -78,6 +78,9 @@ package {
 			selector = Selector.parse("css=Button");
 			assertEquals("fluorida.locator::TypeSelector", getQualifiedClassName(selector));
 			
+			selector = Selector.parse("css=*");
+			assertEquals("fluorida.locator::TypeSelector", getQualifiedClassName(selector));
+			
 			selector = Selector.parse("css=Button[id='button']");
 			assertEquals("fluorida.locator::AttributeSelector", getQualifiedClassName(selector));
 		}

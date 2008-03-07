@@ -10,6 +10,10 @@ package fluorida.locator {
 		}
 		
 		public override function match(element:DisplayObject) : Boolean {
+			if(_type == "*") {
+				return true;
+			}
+			
 			var className:String = getQualifiedClassName(element);
 			var typePattern:RegExp = new RegExp(".*::" + _type);
 			return typePattern.test(className);
