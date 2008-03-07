@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="200" height="32" verticalAlign="middle" horizontalAlign="center">
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			
+			public function set dataProvider(dataProvider:ArrayCollection):void{
+				this.realComboBox.dataProvider=dataProvider;
+			}
+			
+			private function changeColorOfShower():void{
+				colorShower.setStyle("backgroundColor",realComboBox.selectedItem.value);
+			}
+		]]>
+	</mx:Script>
+	<mx:Canvas id="colorShower" width="20" height="20">
+	</mx:Canvas>
+	<mx:ComboBox id="realComboBox" updateComplete="changeColorOfShower()" ></mx:ComboBox>
+</mx:HBox>

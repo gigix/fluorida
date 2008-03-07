@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:ns1="*">
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			
+			[Bindable]
+			private var colors:ArrayCollection = new ArrayCollection(
+				[ {label:"Blue",value:"#009dff"},
+				  {label:"Green",value:"#00ff12"},
+				  {label:"Red",value:"#ff1800"} ]);
+		]]>
+	</mx:Script>
+	<ns1:CustomComboBox id="customComponent" x="164" y="116" dataProvider="{colors}">
+	</ns1:CustomComboBox>
+</mx:Application>
