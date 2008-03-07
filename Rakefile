@@ -1,6 +1,6 @@
 require 'rake'
 
-RELEASE_VERSION = '0.0.1'
+RELEASE_VERSION = '0.0.2'
 
 SRC = 'src'
 BIN = 'bin'
