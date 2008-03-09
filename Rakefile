@@ -8,7 +8,8 @@ TEST = 'test'
 LIB = File.join(TEST, 'lib')
 WEBSITE = 'website'
 COMPILER = 'mxmlc'
-RUNNER = File.join('.', 'flashplayer_9')
+RUNNER_NAME = 'sa_flashplayer_9_debug.exe'
+RUNNER = File.join('.', RUNNER_NAME)
 
 def compile(name)
   source = File.join(SRC, name + '.mxml');
@@ -17,7 +18,14 @@ def compile(name)
   run_compile source, target, option
 end
 
+def check_flash_runner
+  runner_url = "http://download.macromedia.com/pub/flashplayer/updaters/9/#{RUNNER_NAME}"
+  execute "wget #{runner_url}" unless File.exist? RUNNER
+  chmod 0755, RUNNER
+end
+
 def run_flash(name)
+  check_flash_runner
   target = File.join(BIN, name + '.swf')
   run_cmd RUNNER, target
 end
