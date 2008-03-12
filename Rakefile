@@ -80,6 +80,7 @@ end
 task :compile_aut do
   compile 'aut'
   compile 'aut_dragndrop'
+  compile 'aut_timer'
 end
 
 task :clean do

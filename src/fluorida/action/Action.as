@@ -21,6 +21,7 @@ package fluorida.action {
 				mouseOver:MouseOver,
 				mouseOut:MouseOut,
 				dragAndDrop:DragAndDrop,
+				sleep:Sleep,
 				waitForElementProperty:WaitForElementProperty,
 				verifyElementProperty:VerifyElementProperty,
 				verifyText:VerifyText,
