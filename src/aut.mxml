@@ -40,10 +40,17 @@
 	</mx:Script>
 
     <mx:TextInput id="helloText" mouseOver="say('mouse in')" mouseOut="say('mouse out')" doubleClickEnabled="true" doubleClick="say('double click')"/>
-    <mx:VBox>
+    <mx:VBox id="box">
 		<mx:Button label="say hi" name="helloButton" click="say('hi there');" />
 		<mx:Button label="say hi, slowly" name="delayHelloButton" click="sayHiAfter(1)" />
 		<mx:Button label="say hi, even more slowly" name="moreDelayHelloButton" click="sayHiAfter(5)" />
+		<mx:Text id="dummy" />
+		<mx:VBox>
+			<mx:Text id="innerDummy" />
+		</mx:VBox>
+		<mx:VBox id="innerBox">
+			<mx:Text id="anotherDummy" />
+		</mx:VBox>
     </mx:VBox>
     <mx:ComboBox name="namesCombo" dataProvider="{names}" change="changeHandler(event);" />
     

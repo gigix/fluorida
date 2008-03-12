@@ -1,43 +1,97 @@
 package fluorida.locator {
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	
+	import fluorida.util.ArrayUtil;
 
 	public class Selector {
+		public static var ATTRIBUTE_SELECTOR_PATTERN:RegExp = /^(\w+|\*)\[(\w+)=[\"|\'](.+)[\"|\']\]\s?>?\s*(.*)/;
+		public static var TYPE_SELECTOR_PATTERN:RegExp = /^(\w+|\*)\s?>?\s*(.*)/;
+	
 		public static function parse(desc:String) : Selector {
 			var simpleSelectorPattern:RegExp = /^\w+$/;
-			var typeSelectorPattern:RegExp = /^css=(\w+|\*)$/;
-			var attributeSelectorPattern:RegExp = /^css=(\w+|\*)\[(\w+)=[\"|\'](.+)[\"|\']\]/;
-			
 			if(simpleSelectorPattern.test(desc)) {
 				return new SimpleSelector(desc);
-			} else if(typeSelectorPattern.test(desc)) {
-				return new TypeSelector(typeSelectorPattern.exec(desc)[1]);
-			} else if(attributeSelectorPattern.test(desc)) {
-				var matches:Array = attributeSelectorPattern.exec(desc);
-				return new AttributeSelector(matches[1], matches[2], matches[3]);
-			} else {
-				throw new Error("Invalid selector description: " + desc);
+			} 
+			
+			var cssSelectorPattern:RegExp = /^css=(.*)$/;
+			if(cssSelectorPattern.test(desc)) {
+				return parseCssSelector(cssSelectorPattern.exec(desc)[1]);
 			}
+			
+			throw new Error("Invalid selector description: " + desc);
 		}
 		
-		public function select(container:DisplayObjectContainer) : Array {
-			var result:Array = new Array();
-			recursiveSelect(container, result);
-			return result;
+		private static function parseCssSelector(cssDesc:String) : Selector {
+			var selector:Selector;
+			var matches:Array;
+			var remainingDesc:String;
+			
+			if(ATTRIBUTE_SELECTOR_PATTERN.test(cssDesc)) {
+				matches = ATTRIBUTE_SELECTOR_PATTERN.exec(cssDesc);
+				selector = new AttributeSelector(matches[1], matches[2], matches[3]);
+				remainingDesc = matches[4];
+			} else if(TYPE_SELECTOR_PATTERN.test(cssDesc)) {
+				matches = TYPE_SELECTOR_PATTERN.exec(cssDesc);
+				selector = new TypeSelector(matches[1]);
+				remainingDesc = matches[2];
+			}
+			
+			if(selector == null) {
+				throw new Error("Invalid css selector description: " + cssDesc);
+			}
+			
+			if(remainingDesc != "") {
+				selector.setChildSelector(parseCssSelector(remainingDesc));
+			}
+			return selector;
 		}
 		
-		private function recursiveSelect(container:DisplayObjectContainer, result:Array) : void {
+		private static function recursiveSelect(selector:Selector, container:DisplayObjectContainer, result:Array) : void {
+			selectChildren(selector, container, result);
 			for(var cursor:int = 0; cursor < container.numChildren; cursor++) {
 				var child:DisplayObject = container.getChildAt(cursor);
-				if(match(child)) {
-					result.push(child);
-				}
 				var subContainer:DisplayObjectContainer = child as DisplayObjectContainer;
 				if(subContainer == null) {
 					continue;	
 				}
-				recursiveSelect(subContainer, result);
+				recursiveSelect(selector, subContainer, result);
 			}
+		}
+		
+		private static function selectChildren(selector:Selector, container:DisplayObjectContainer, result:Array) : void {
+			for(var cursor:int = 0; cursor < container.numChildren; cursor++) {
+				var child:DisplayObject = container.getChildAt(cursor);
+				if(selector.match(child)) {
+					if(selector.getChildSelector() == null) {
+						result.push(child);
+					} else {
+						var subContainer:DisplayObjectContainer = child as DisplayObjectContainer;
+						if(subContainer == null) {
+							continue;
+						}
+						var matchedChildren:Array = new Array();
+						selectChildren(selector.getChildSelector(), subContainer, matchedChildren);
+						ArrayUtil.pushAll(result, matchedChildren);
+					}
+				}
+			}
+		}
+		
+		private var childSelector:Selector;
+		
+		private function setChildSelector(selector:Selector) : void {
+			childSelector = selector;
+		}
+		
+		private function getChildSelector() : Selector {
+			return childSelector;
+		}
+		
+		public function select(container:DisplayObjectContainer) : Array {
+			var result:Array = new Array();
+			recursiveSelect(this, container, result);
+			return result;
 		}
 		
 		public function match(element:DisplayObject) : Boolean {

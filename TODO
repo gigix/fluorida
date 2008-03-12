@@ -5,14 +5,14 @@
 Action:	verifyElementPresent / waitForElementPresent (done)
 CSS selector: simple / type / attribute (done)
 CSS selector: universal (done)
+CSS selector: children (done)
 
 Specify "autorun" from containing HTML
 More actions:
 	sleep
 	...
 CSS selectors:
-	children
-	descendant
+	descendant - refactor Selector first
 	position
 	pseudo-classes
 	...

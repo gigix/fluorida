@@ -65,10 +65,17 @@ package {
 		
 		public function testRegexp() : void {
 			assertTrue(new RegExp(".?ell.*$").test("hello"));
-			var matches:Array =  /(\w+)\[(\w+)=[\"|\'](.+)[\"|\']\]/.exec("Button[id='button']");
+			assertTrue(Selector.TYPE_SELECTOR_PATTERN.test("Button"));
+			assertEquals("", Selector.TYPE_SELECTOR_PATTERN.exec("Button")[2]);
+			
+			var matches:Array = Selector.ATTRIBUTE_SELECTOR_PATTERN.exec("Button[id='button']");
 			assertEquals("Button", matches[1]);
 			assertEquals("id", matches[2]);
 			assertEquals("button", matches[3]);
+			
+			matches = Selector.TYPE_SELECTOR_PATTERN.exec("VBox > Button[name='helloButton']");
+			assertEquals("VBox", matches[1]);
+			assertEquals("Button[name='helloButton']", matches[2]);
 		}
 		
 		public function testCreateSelector() : void {
@@ -82,6 +89,12 @@ package {
 			assertEquals("fluorida.locator::TypeSelector", getQualifiedClassName(selector));
 			
 			selector = Selector.parse("css=Button[id='button']");
+			assertEquals("fluorida.locator::AttributeSelector", getQualifiedClassName(selector));
+			
+			selector = Selector.parse("css=VBox Button[id='button']");
+			assertEquals("fluorida.locator::TypeSelector", getQualifiedClassName(selector));
+			
+			selector = Selector.parse("css=VBox[id='box'] Button");
 			assertEquals("fluorida.locator::AttributeSelector", getQualifiedClassName(selector));
 		}
 	}
