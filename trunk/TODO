@@ -3,13 +3,14 @@
 ===== FEATURES =====
 
 Action:	verifyElementPresent / waitForElementPresent (done)
+Action: sleep (done)
 CSS selector: simple / type / attribute (done)
 CSS selector: universal (done)
 CSS selector: children (done)
 
 Specify "autorun" from containing HTML
 More actions:
-	sleep
+	handle alerts
 	...
 CSS selectors:
 	descendant - refactor Selector first
