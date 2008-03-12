@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="horizontal">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			private function showSimpleAlert():void{
+				Alert.show("Hello, World!");
+			}
+			
+			private function showTwoButtonsAlert():void{
+				Alert.show("Do you want to save your changes?", "Save Changes", 3);
+			}
+			
+			private function showThiryButtonsAlert():void{
+                Alert.show("The window will be closed. Do you want to save your changes?","Save Changes",1|2|8);
+			}
+		]]>
+	</mx:Script>	
+	<mx:Panel title="Alert Control Example" width="75%" horizontalAlign="center" paddingTop="10">
+      <mx:Text width="100%" color="blue" textAlign="center"
+          text="Click the button below to display a simple Alert window."/>
+      <mx:Button id="simpleAlertShower" click="showSimpleAlert();" label="Click Me"/>
+
+      <mx:Text width="100%" color="blue" textAlign="center"
+          text="Click the button below to display an Alert window and capture the button pressed by the user."/>
+      <mx:Button id="twoButtonsAlertShower" label="Click Me" click="showTwoButtonsAlert();"/>
+
+      <mx:Text width="100%" color="blue" textAlign="center"
+          text="Click the button below to display an Alert window with thriy buttons."/>
+      <mx:Button id="thiryButtonsAlertShower" label="Click Me" click="showThiryButtonsAlert();"/>
+    </mx:Panel>
+
+	
+</mx:Application>
