@@ -1,0 +1,4 @@
+|open|aut_customcomponent.swf|
+
+|select|css=ComboBox|1|
+|verifyText|colorText|#00ff12|
