@@ -23,6 +23,8 @@ package {
 			testSuite.addTest(new FluoridaTest("testMapAccess"));
 			testSuite.addTest(new FluoridaTest("testRegexp"));
 			testSuite.addTest(new FluoridaTest("testCreateSelector"));
+			
+			testSuite.addTest(new ReportingTest("testXMLReport"));
             return testSuite;
         }
         
@@ -97,5 +99,6 @@ package {
 			selector = Selector.parse("css=VBox[id='box'] Button");
 			assertEquals("fluorida.locator::AttributeSelector", getQualifiedClassName(selector));
 		}
+		
 	}
 }

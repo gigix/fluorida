@@ -1,0 +1,4 @@
+<fluorida
+	defaultSuite="default.fls"
+	postResultTo="http://localhost:3000/result"
+/>

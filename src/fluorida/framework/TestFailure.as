@@ -11,5 +11,13 @@ package fluorida.framework {
 		public function toString() : String {
 			return test.getName();
 		}
+		
+		public function toXml() : XML {
+			return <{getType()} message={cause.message}>{cause.getStackTrace()}</{getType()}>;
+		}
+		
+		private function getType() : String {
+			return (cause is AssertionError) ? "failure" : "error";
+		}
 	}	
 }

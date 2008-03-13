@@ -11,11 +11,15 @@ COMPILER = 'mxmlc'
 RUNNER_NAME = 'sa_flashplayer_9_debug.exe'
 RUNNER = File.join('.', RUNNER_NAME)
 
-def compile(name)
-  source = File.join(SRC, name + '.mxml');
+def compile(name, src_dir = SRC)
+  source = File.join(src_dir, name + '.mxml');
   target = File.join(BIN, name + '.swf');
   option = "-use-network=false"
   run_compile source, target, option
+end
+
+def compile_aut(name)
+  compile name, File.join(TEST, 'aut')
 end
 
 def check_flash_runner
@@ -78,11 +82,11 @@ task :compile_tester do
 end
 
 task :compile_aut do
-  compile 'aut'
-  compile 'aut_dragndrop'
-  compile 'aut_timer'
-  compile 'aut_customcomponent'
-  compile 'aut_popup'
+  compile_aut 'aut'
+  compile_aut 'aut_dragndrop'
+  compile_aut 'aut_timer'
+  compile_aut 'aut_customcomponent'
+  compile_aut 'aut_popup'
 end
 
 task :clean do
@@ -104,10 +108,7 @@ task :prepare_test do
   mkdir_p target_sample_dir
   cp Dir[source_smaple_dir], target_sample_dir
   
-  source_default_fls = File.join(SRC, 'default.fls')
-  source_defult_html = File.join(SRC, 'default.html')
-  cp source_default_fls, BIN
-  cp source_defult_html, BIN
+  cp File.join(TEST, 'default.fls'), BIN
 end
 
 task :run_unit_test do
