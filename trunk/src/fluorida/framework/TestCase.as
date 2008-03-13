@@ -63,6 +63,18 @@ package fluorida.framework {
 			runNextCommand();	
 		}
 		
+		public function toXml(allFailures:Array) : XML {
+			var caseNode:XML = <testcase name={_name} />;
+			for each(var failure:TestFailure in allFailures.filter(isMine)) {
+				caseNode.appendChild(failure.toXml());
+			}
+			return caseNode;
+		}
+		
+		private function isMine(failure:TestFailure, index:int, array:Array) : Boolean {
+			return failure.test == this;
+		}
+		
 		private function runNextCommand() : void {
 			if(_runningCommands.length == 0) {
 				_finished = true;

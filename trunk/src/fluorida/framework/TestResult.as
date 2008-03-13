@@ -43,5 +43,16 @@ package fluorida.framework {
 			result += ", Failure: " + _failures.length;
 			return result;
 		}
+		
+		public function toXml() : XML {
+			var suiteNode:XML = 
+				<testsuite name={_testSuite.getName()} 
+					tests={_testSuite.countTestCases()} errors={_errors.length} failures={_failures.length} />;
+					
+			for each(var testCase:TestCase in _testSuite.getTestCases()) {
+				suiteNode.appendChild(testCase.toXml(getUnsuccessfulCases()));
+			}
+			return suiteNode;
+		}
 	}	
 }

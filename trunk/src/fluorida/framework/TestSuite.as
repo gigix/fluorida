@@ -25,6 +25,10 @@ package fluorida.framework {
 			_testCases.push(testCase);
 		}
 		
+		public function getName() : String {
+			return _name;
+		}
+		
 		public function getTestCases() : Array {
 			return _testCases;
 		}

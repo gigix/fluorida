@@ -18,7 +18,8 @@ CSS selectors:
 	position
 	pseudo-classes
 	...
-How to exit and generate text-based report automatically?
+Specify default test suite and result-posting url in config.xml
+Generate XML report and exit Tester appropriately
 More indicative error message from verifyElementProperty
 
 
@@ -31,4 +32,5 @@ DragAndDrop should bring data in DragSource
 Cleanup TestLoader (done)
 
 "Dogfood" tests
+Continuous Integration Environment (where to host?)
 Is it possible (and/or necessary) to have parrel verify/waitFor actions?
