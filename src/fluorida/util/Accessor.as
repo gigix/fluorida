@@ -24,7 +24,7 @@ package fluorida.util {
 		
 		public function getApplication() : Application {
 			return _application;	
-		}	
+		}
 		
 		public function getAutContainer() : SWFLoader {
 			return $(_application, 'aut') as SWFLoader;

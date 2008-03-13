@@ -1,0 +1,6 @@
+|open|aut_popup.swf|
+
+|click|simpleAlertShower|
+|sleep|1|
+|closePopup|
+|verifyText|closeDetail|4|

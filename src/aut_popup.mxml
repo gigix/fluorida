@@ -3,16 +3,23 @@
 	<mx:Script>
 		<![CDATA[
 			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			
 			private function showSimpleAlert():void{
-				Alert.show("Hello, World!");
+				Alert.show("Hello, World!", "Hello", 4, this, alertClickHandler);
 			}
 			
 			private function showTwoButtonsAlert():void{
-				Alert.show("Do you want to save your changes?", "Save Changes", 3);
+				Alert.show("Do you want to save your changes?", "Save Changes", 3, this, alertClickHandler);
 			}
 			
 			private function showThiryButtonsAlert():void{
-                Alert.show("The window will be closed. Do you want to save your changes?","Save Changes",1|2|8);
+                Alert.show("The window will be closed. Do you want to save your changes?",
+						"Save Changes",1|2|8, this, alertClickHandler);
+			}
+			
+			private function alertClickHandler(event:CloseEvent) : void {
+				closeDetail.text = event.detail.toString();
 			}
 		]]>
 	</mx:Script>	
@@ -28,6 +35,8 @@
       <mx:Text width="100%" color="blue" textAlign="center"
           text="Click the button below to display an Alert window with thriy buttons."/>
       <mx:Button id="thiryButtonsAlertShower" label="Click Me" click="showThiryButtonsAlert();"/>
+	  
+	  <mx:Text id="closeDetail" />
     </mx:Panel>
 
 	
