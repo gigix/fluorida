@@ -16,6 +16,7 @@ sample/test_locators.flt
 sample/test_sleep.flt
 sample/test_custom_component.flt
 sample/test_style.flt
+#sample/test_popup.flt
 
 # it takes too long
 # sample/test_set_timeout.flt

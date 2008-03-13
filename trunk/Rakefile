@@ -69,7 +69,7 @@ task :server do
   end
 end
 
-task :run => [:compile_tester, :compile_aut, :prepare_test] do
+task :run => [:clean, :compile_tester, :compile_aut, :prepare_test] do
   run_flash "Tester"
 end
 
@@ -82,6 +82,7 @@ task :compile_aut do
   compile 'aut_dragndrop'
   compile 'aut_timer'
   compile 'aut_customcomponent'
+  compile 'aut_popup'
 end
 
 task :clean do
