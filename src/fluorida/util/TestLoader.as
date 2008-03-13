@@ -10,7 +10,7 @@ package fluorida.util {
 	import fluorida.framework.TestCase;
 	
 	public class TestLoader extends EventDispatcher {
-		public static var COMPLETE:String = "complete";
+		public static var COMPLETE:String = Event.COMPLETE;
 		
 		private var _loader:URLLoader;
 		private var _suite:TestSuite;
@@ -21,19 +21,13 @@ package fluorida.util {
 		}
 
 		public function load(url:String) : void {
-        	var request:URLRequest = new URLRequest(url);
-		    _loader = new URLLoader();
-		    _loader.addEventListener(COMPLETE, createSuite);
-		    _loader.load(request);
+			loadFile(url, createSuite);
 		}
 		
 		private function createSuite(event:Event) : void {
 			_suite = new TestSuite();
-			
-			var content:String = _loader.data;
-			var urls:Array = content.split("\n").map(trim).filter(notEmpty).filter(notComment);
-			
-			_cases = urls.map(createCase);
+			_cases = getUsefulRows(_loader.data).map(createCase);
+
 			for each(var testCase:TestCase in _cases) {
 				_suite.addTestCase(testCase);
 			}
@@ -46,21 +40,17 @@ package fluorida.util {
 				dispatchEvent(new Event(COMPLETE));
 				return ;
 			}
-
 			var testCase:TestCase = _cases[0];
-        	var request:URLRequest = new URLRequest(testCase.getName());
-		    _loader = new URLLoader();
-		    _loader.addEventListener(COMPLETE, loadTestCase);
-		    _loader.load(request);
+			loadFile(testCase.getName(), loadTestCase);
 		}
 		
 		private function loadTestCase(event:Event) : void {
 			var testCase:TestCase = _cases.shift();
+			var string:String = _loader.data;
 			
-			var content:String = _loader.data;
-			var lines:Array = content.split("\n").map(trim).filter(notEmpty).filter(notComment);
-			for each(var line:String in lines) {
-				var cmdArray:Array = line.split("|").map(trim).filter(notEmpty);
+			var rows:Array = getUsefulRows(string);
+			for each(var row:String in rows) {
+				var cmdArray:Array = row.split("|").map(trim).filter(notEmpty);
 				var action:String = cmdArray.shift();
 				var args:Array = cmdArray;
 				var command:Command = new Command(action, args);
@@ -68,6 +58,16 @@ package fluorida.util {
 			}
 			
 			loadNextCase();
+		}
+		
+		private function loadFile(url:String, completeHandler:Function) : void {
+		    _loader = new URLLoader();
+		    _loader.addEventListener(COMPLETE, completeHandler);
+		    _loader.load(new URLRequest(url));
+		}
+		
+		private function getUsefulRows(content:String) : Array {
+			return content.split("\n").map(trim).filter(notEmpty).filter(notComment);
 		}
 		
 		private function notEmpty(element:*, index:int, arr:Array) : Boolean {

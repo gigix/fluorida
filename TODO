@@ -28,7 +28,7 @@ DragAndDrop should bring data in DragSource
 
 
 ===== HOUSE CLEAN =====
+Cleanup TestLoader (done)
 
 "Dogfood" tests
-Cleanup TestLoader
 Is it possible (and/or necessary) to have parrel verify/waitFor actions?
