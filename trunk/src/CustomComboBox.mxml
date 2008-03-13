@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="200" height="32" verticalAlign="middle" horizontalAlign="center">
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="200" height="32" verticalAlign="middle" horizontalAlign="center">
 	<mx:Script>
 		<![CDATA[
 			import mx.collections.ArrayCollection;
@@ -8,12 +9,14 @@
 				this.realComboBox.dataProvider=dataProvider;
 			}
 			
-			private function changeColorOfShower():void{
+			private function changeColor():void{
 				colorShower.setStyle("backgroundColor",realComboBox.selectedItem.value);
+				colorText.text = realComboBox.selectedItem.value;
 			}
 		]]>
 	</mx:Script>
 	<mx:Canvas id="colorShower" width="20" height="20">
+		<mx:Text id="colorText" />
 	</mx:Canvas>
-	<mx:ComboBox id="realComboBox" updateComplete="changeColorOfShower()" ></mx:ComboBox>
+	<mx:ComboBox id="realComboBox" updateComplete="changeColor()" />
 </mx:HBox>

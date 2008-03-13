@@ -81,6 +81,7 @@ task :compile_aut do
   compile 'aut'
   compile 'aut_dragndrop'
   compile 'aut_timer'
+  compile 'aut_customcomponent'
 end
 
 task :clean do
