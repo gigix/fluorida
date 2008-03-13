@@ -3,6 +3,8 @@
 
 = Get Fluorida =
 
+=== Download Pre-built Binary ===
+
 Download Fluorida [http://fluorida.googlecode.com/files/Fluorida-0.0.1.zip zip package] and unzip. 
 
 That's it.
@@ -11,6 +13,22 @@ Open *Tester.swf* with [http://www.adobe.com/products/flashplayer/ Adobe Flash P
 
 http://lh3.google.com/gigix1980/R8_HvfXatII/AAAAAAAACvM/gPJJD2vbWYM/s400/fluorida-1.PNG
 
+=== Build From Source Code ===
+
+Check out Fluorida source code from our [http://code.google.com/p/fluorida/source/checkout Subversion repository]:
+
+{{{
+# Non-members may check out a read-only working copy anonymously over HTTP.
+svn checkout http://fluorida.googlecode.com/svn/trunk/ fluorida-read-only
+}}}
+
+[http://rake.rubyforge.org/ Rake], [http://www.adobe.com/go/flex_trial Flex 3 SDK] and [http://www.adobe.com/products/flashplayer/ Flash Player] are required to build Fluorida. *NOTE*: Flex Builder is not required. 
+
+Make sure `rake` and `mxmlc` are in `PATH`. Download [http://www.adobe.com/products/flashplayer/ Flash Player] to `$PROJECT_ROOT/sa_flashplayer_9_debug.exe`. Then invoke `rake` at `$PROJECT_ROOT` and you should see a successful test suite running.
+
+(If you haven't downloaded Flash Player, Fluorida build script will do that for your. In that case you have to make sure `wget` is in `PATH`.)
+
+Invoke `rake` to re-build Fluorida without running test suite. You can find built binary at `$PROJECT_ROOT/bin`.
 
 = Use Fluorida Locally =
 
