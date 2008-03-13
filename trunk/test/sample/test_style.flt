@@ -1,0 +1,5 @@
+|open|aut_customcomponent.swf|
+
+|select|css=ComboBox|1|
+|verifyStyle|colorShower|backgroundColor|65298|
+# #00ff12(hex) == 65298(dec)

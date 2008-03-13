@@ -4,6 +4,7 @@
 
 Action:	verifyElementPresent / waitForElementPresent (done)
 Action: sleep (done)
+Action:	verifyStyle (done)
 CSS selector: simple / type / attribute (done)
 CSS selector: universal (done)
 CSS selector: children (done)
@@ -11,7 +12,6 @@ CSS selector: children (done)
 Specify "autorun" from containing HTML
 More actions:
 	handle alerts
-	support style
 	...
 CSS selectors:
 	descendant - refactor Selector first
