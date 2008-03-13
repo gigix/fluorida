@@ -11,6 +11,7 @@ CSS selector: children (done)
 Specify "autorun" from containing HTML
 More actions:
 	handle alerts
+	support style
 	...
 CSS selectors:
 	descendant - refactor Selector first
