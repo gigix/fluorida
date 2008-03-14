@@ -1,6 +1,4 @@
 package fluorida.util {
-	import flash.net.URLLoader;
-	import flash.net.URLRequest;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import mx.utils.StringUtil;
@@ -8,11 +6,9 @@ package fluorida.util {
 	import fluorida.framework.Command;
 	import fluorida.framework.TestSuite;
 	import fluorida.framework.TestCase;
+	import fluorida.util.FileLoader;
 	
 	public class TestLoader extends EventDispatcher {
-		public static var COMPLETE:String = Event.COMPLETE;
-		
-		private var _loader:URLLoader;
 		private var _suite:TestSuite;
 		private var _cases:Array = new Array();
 		
@@ -21,12 +17,12 @@ package fluorida.util {
 		}
 
 		public function load(url:String) : void {
-			loadFile(url, createSuite);
+			new FileLoader(this, createSuite).load(url);
 		}
 		
-		private function createSuite(event:Event) : void {
+		private function createSuite(data:String) : void {
 			_suite = new TestSuite();
-			_cases = getUsefulRows(_loader.data).map(createCase);
+			_cases = getUsefulRows(data).map(createCase);
 
 			for each(var testCase:TestCase in _cases) {
 				_suite.addTestCase(testCase);
@@ -37,17 +33,15 @@ package fluorida.util {
 		
 		private function loadNextCase() : void {
 			if(_cases.length == 0) {
-				dispatchEvent(new Event(COMPLETE));
+				dispatchEvent(new Event(Event.COMPLETE));
 				return ;
 			}
 			var testCase:TestCase = _cases[0];
-			loadFile(testCase.getName(), loadTestCase);
+			new FileLoader(this, loadTestCase).load(testCase.getName());
 		}
 		
-		private function loadTestCase(event:Event) : void {
+		private function loadTestCase(string:String) : void {
 			var testCase:TestCase = _cases.shift();
-			var string:String = _loader.data;
-			
 			var rows:Array = getUsefulRows(string);
 			for each(var row:String in rows) {
 				var cmdArray:Array = row.split("|").map(trim).filter(notEmpty);
@@ -58,12 +52,6 @@ package fluorida.util {
 			}
 			
 			loadNextCase();
-		}
-		
-		private function loadFile(url:String, completeHandler:Function) : void {
-		    _loader = new URLLoader();
-		    _loader.addEventListener(COMPLETE, completeHandler);
-		    _loader.load(new URLRequest(url));
 		}
 		
 		private function getUsefulRows(content:String) : Array {

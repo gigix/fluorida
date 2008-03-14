@@ -38,7 +38,7 @@
 			
 			public function startTest() : void {
 				suiteUrl.text = testSuiteUrl;
-				new Fluorida(application as Application).runTestSuite(testSuiteUrl);
+				new Fluorida(application as Application).start(testSuiteUrl);
 			}
 			
 			private function onTabChange() : void {

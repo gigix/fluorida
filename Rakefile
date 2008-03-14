@@ -109,6 +109,7 @@ task :prepare_test do
   cp Dir[source_smaple_dir], target_sample_dir
   
   cp File.join(TEST, 'default.fls'), BIN
+  cp File.join(SRC, 'config.xml'), BIN
 end
 
 task :run_unit_test do

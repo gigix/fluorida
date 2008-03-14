@@ -8,8 +8,10 @@ Action:	verifyStyle (done)
 CSS selector: simple / type / attribute (done)
 CSS selector: universal (done)
 CSS selector: children (done)
+Generate XML report (done)
 
-Specify "autorun" from containing HTML
+Post result to url specified in config.xml and exit Tester appropriately
+Specify default suite url in config.xml
 More actions:
 	handle alerts
 	...
@@ -18,8 +20,7 @@ CSS selectors:
 	position
 	pseudo-classes
 	...
-Specify default test suite and result-posting url in config.xml
-Generate XML report and exit Tester appropriately
+Specify "autorun" from containing HTML
 More indicative error message from verifyElementProperty
 
 

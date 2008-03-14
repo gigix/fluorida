@@ -1,6 +1,7 @@
 package fluorida.framework {
 	import mx.core.Application;
 	
+	import fluorida.publisher.Publisher;
     import fluorida.util.WaitAndRun;
     import fluorida.util.Accessor;
     import fluorida.util.ArrayUtil;
@@ -11,6 +12,7 @@ package fluorida.framework {
 		private var _name:String;
 		private var _accessor:Accessor = null;
 		private var _result:TestResult = null;
+		private var _publisher:Publisher = null;
 		
 		public function TestSuite(name:String = "") {
 			_name = name;
@@ -19,6 +21,10 @@ package fluorida.framework {
 		
 		public function setApplication(application:Application) : void {
 			_accessor = new Accessor(application);
+		}
+		
+		public function setPublisher(publisher:Publisher) : void {
+			_publisher = publisher;
 		}
 		
 		public function addTestCase(testCase:TestCase) : void {
@@ -48,6 +54,7 @@ package fluorida.framework {
 		
 		private function runNextTestCase() : void {
 			if(_runningTestCases.length == 0) {
+				_publisher.publish(_result);
 				_accessor.enableRunSuite();
 				return;
 			}
