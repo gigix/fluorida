@@ -12,6 +12,7 @@ package fluorida.action {
 	public class Action {
 		private static function getActionMap() : Object {
 			return {
+				fail:Fail,
 				setTimeout:SetTimeout,
 				click:Click,
 				clickAt:ClickAt,
