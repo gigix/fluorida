@@ -1,4 +1,5 @@
 class ResultController < ApplicationController
+  skip_before_filter :verify_authenticity_token  
   REPORT_DIR = File.join RAILS_ROOT, 'report'
   
   def report

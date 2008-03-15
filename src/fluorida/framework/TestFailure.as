@@ -13,7 +13,7 @@ package fluorida.framework {
 		}
 		
 		public function toXml() : XML {
-			return <{getType()} message={cause.message}>{cause.getStackTrace()}</{getType()}>;
+			return <{getType()} message={cause.message}><![CDATA[ {cause.getStackTrace()} ]]></{getType()}>;
 		}
 		
 		private function getType() : String {

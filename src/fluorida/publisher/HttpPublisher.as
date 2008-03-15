@@ -1,4 +1,5 @@
 package fluorida.publisher {
+    import mx.controls.Alert;
 	import mx.rpc.http.HTTPService;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.events.FaultEvent;
@@ -14,11 +15,19 @@ package fluorida.publisher {
 			var http:HTTPService = new HTTPService();
 			http.method = "POST";
 			http.url = _url;
-			http.addEventListener(ResultEvent.RESULT, exit);
-			http.addEventListener(FaultEvent.FAULT, publishToScreen);
+			http.addEventListener(ResultEvent.RESULT, onSuccessful);
+			http.addEventListener(FaultEvent.FAULT, onError);
 			
-			var parameters:Object = {data : xml.toXMLString()};
+			var parameters:Object = {data: xml.toXMLString(), authenticity_token: "08636d4bb04dee6871dd01cc4b86a559d5e1cf08"};
 			http.send(parameters);
 		}		
+
+		private function onSuccessful(event:*) : void {
+			Alert.show("Result has been published to " + _url);
+		}
+		
+		private function onError(event:*) : void {
+			Alert.show(event["fault"]);
+		}
 	}
 }

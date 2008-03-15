@@ -1,5 +1,4 @@
 package fluorida.publisher {
-    import mx.controls.Alert;
 	import flash.system.System;
 
 	import fluorida.framework.TestResult;
@@ -24,15 +23,6 @@ package fluorida.publisher {
 		
 		protected function publishXML(xml:XML) : void {
 			throw new Error("This function should never be invoked.");
-		}
-		
-		protected function exit(event:*) : void {
-			System.exit(_result.getUnsuccessfulCases().length);
-		}
-		
-		protected function publishToScreen(event:*) : void {
-			Alert.show(event["fault"]);
-			new ScreenPublisher().publish(_result);
 		}
 	}
 }
