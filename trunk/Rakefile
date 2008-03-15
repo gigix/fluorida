@@ -115,7 +115,7 @@ end
 def compile(name, src_dir = SRC)
   source = File.join(src_dir, name + '.mxml');
   target = File.join(BIN, name + '.swf');
-  option = "-use-network=false"
+  option = "-use-network=true"
   run_compile source, target, option
 end
 

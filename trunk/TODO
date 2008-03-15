@@ -11,7 +11,7 @@ CSS selector: children (done)
 Generate XML report (done)
 Post result to url specified in config.xml (done)
 
-Exit Tester appropriately
+Rails plugin
 Specify default suite url in config.xml
 More actions:
 	handle alerts
