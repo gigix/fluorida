@@ -28,6 +28,10 @@ package fluorida.framework {
 			return _errors.concat(_failures);
 		}
 		
+		public function getStatus() : String {
+			return (getUnsuccessfulCases().length == 0) ? "successful" : "failed";
+		}
+		
 		public function isSuccessful() : Boolean {
 			return getUnsuccessfulCases().length == 0;
 		}

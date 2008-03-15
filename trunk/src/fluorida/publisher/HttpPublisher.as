@@ -4,6 +4,8 @@ package fluorida.publisher {
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.events.FaultEvent;
 	
+	import fluorida.framework.TestResult;
+	
 	public class HttpPublisher extends Publisher {
 		private var _url:String;
 	
@@ -11,14 +13,14 @@ package fluorida.publisher {
 			_url = url;
 		}
 		
-		protected override function publishXML(xml:XML) : void {
+		public override function publish(result:TestResult) : void {
 			var http:HTTPService = new HTTPService();
 			http.method = "POST";
 			http.url = _url;
 			http.addEventListener(ResultEvent.RESULT, onSuccessful);
 			http.addEventListener(FaultEvent.FAULT, onError);
 			
-			var parameters:Object = {data: xml.toXMLString(), authenticity_token: "08636d4bb04dee6871dd01cc4b86a559d5e1cf08"};
+			var parameters:Object = {data: result.toXml().toXMLString(), status: result.getStatus()};
 			http.send(parameters);
 		}		
 

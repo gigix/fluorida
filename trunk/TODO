@@ -10,12 +10,10 @@ CSS selector: universal (done)
 CSS selector: children (done)
 Generate XML report (done)
 Post result to url specified in config.xml (done)
+Handle alerts (done)
 
 Rails plugin
 Specify default suite url in config.xml
-More actions:
-	handle alerts
-	...
 CSS selectors:
 	descendant - refactor Selector first
 	position
@@ -23,6 +21,7 @@ CSS selectors:
 	...
 Specify "autorun" from containing HTML
 More indicative error message from verifyElementProperty
+Any more actions?
 
 
 ===== DEFECTS =====
