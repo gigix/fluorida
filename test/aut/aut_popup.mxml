@@ -2,23 +2,33 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="horizontal">
 	<mx:Script>
 		<![CDATA[
+			import mx.containers.TitleWindow;
+			import mx.managers.PopUpManager;
 			import mx.controls.Alert;
 			import mx.events.CloseEvent;
 			
-			private function showSimpleAlert():void{
+			private function showSimpleAlert() : void {
 				Alert.show("Hello, World!", "Hello", 4, this, alertClickHandler);
 			}
 			
-			private function showTwoButtonsAlert():void{
+			private function showTwoButtonsAlert() : void {
 				Alert.show("Do you want to save your changes?", "Save Changes", 3, this, alertClickHandler);
 			}
 			
-			private function showThiryButtonsAlert():void{
+			private function showThiryButtonsAlert() : void {
                 Alert.show("The window will be closed. Do you want to save your changes?",
 						"Save Changes",1|2|8, this, alertClickHandler);
 			}
 			
+			private function showCustomTitleWindow() : void {
+				var customTitleWindow:CustomTitleWindow = PopUpManager.createPopUp(this,CustomTitleWindow,true) as CustomTitleWindow;
+				customTitleWindow.addEventListener(CloseEvent.CLOSE,titleWindowClickHandler);
+				PopUpManager.centerPopUp(customTitleWindow);
+			}
 			private function alertClickHandler(event:CloseEvent) : void {
+				closeDetail.text = event.detail.toString();
+			}
+			private function titleWindowClickHandler(event:CloseEvent) : void {
 				closeDetail.text = event.detail.toString();
 			}
 		]]>
@@ -35,7 +45,10 @@
       <mx:Text width="100%" color="blue" textAlign="center"
           text="Click the button below to display an Alert window with thriy buttons."/>
       <mx:Button id="thiryButtonsAlertShower" label="Click Me" click="showThiryButtonsAlert();"/>
-	  
+	   <mx:Text width="100%" color="blue" textAlign="center"
+          text="Click the button below to display an custom TitleWindow window."/>
+      <mx:Button id="customTitleWindowShower" label="Click Me" click="showCustomTitleWindow();"/>
+	 
 	  <mx:Text id="closeDetail" />
     </mx:Panel>
 
