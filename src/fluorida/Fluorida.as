@@ -6,11 +6,13 @@ package fluorida {
 	import fluorida.publisher.Publisher;
 	import fluorida.util.TestLoader;
 	import fluorida.util.FileLoader;
+	import fluorida.util.Config;
 	
 	public class Fluorida {
 		private var _application:Application;
 		private var _testLoader:TestLoader;
 		private var _publisher:Publisher;
+		private var _config:Config;
 		private var _suiteUrl:String;
 		
 		public function Fluorida(application:Application) {
@@ -23,12 +25,13 @@ package fluorida {
 		}
 		
 		private function configLoadComplete(data:String) : void {
-			_publisher = Publisher.create(data);
+			_config = new Config(data);
+			_publisher = Publisher.create(_config.getResultUrl());
 			runTestSuite(_suiteUrl);
 		}
 		
 		private function runTestSuite(url:String) : void {
-			_testLoader = new TestLoader();
+			_testLoader = new TestLoader(_config.getBaseUrl());
 			_testLoader.addEventListener(Event.COMPLETE, suiteLoaded);
 			_testLoader.load(url);
 		}

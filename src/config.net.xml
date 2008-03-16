@@ -1,4 +1,4 @@
 <fluorida
 	postResultTo="http://localhost:3000/result/report"
-	baseUrl="."
+	baseUrl="http://localhost:3000/tester"
 />
