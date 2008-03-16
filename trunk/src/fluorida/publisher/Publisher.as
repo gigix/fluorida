@@ -4,9 +4,7 @@ package fluorida.publisher {
 	import fluorida.framework.TestResult;
 
 	public class Publisher {
-		public static function create(configString:String) : Publisher {
-			var config:XML = new XML(configString);
-			var resultUrl:String = config.attribute("postResultTo");
+		public static function create(resultUrl:String) : Publisher {
 			if(resultUrl == "") {
 				return new ScreenPublisher();
 			} else {

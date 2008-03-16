@@ -9,15 +9,24 @@ package fluorida.util {
 	import fluorida.util.FileLoader;
 	
 	public class TestLoader extends EventDispatcher {
+		private var _baseUrl:String;
 		private var _suite:TestSuite;
 		private var _cases:Array = new Array();
+		
+		public function TestLoader(baseUrl:String) {
+			_baseUrl = baseUrl;
+		}
 		
 		public function getSuite() : TestSuite {
 			return _suite;	
 		}
 
 		public function load(url:String) : void {
-			new FileLoader(this, createSuite).load(url);
+			new FileLoader(this, createSuite).load(getUrl(url));
+		}
+		
+		private function getUrl(url:String) : String {
+			return _baseUrl + "/" + url;
 		}
 		
 		private function createSuite(data:String) : void {
@@ -37,7 +46,7 @@ package fluorida.util {
 				return ;
 			}
 			var testCase:TestCase = _cases[0];
-			new FileLoader(this, loadTestCase).load(testCase.getName());
+			new FileLoader(this, loadTestCase).load(getUrl(testCase.getName()));
 		}
 		
 		private function loadTestCase(string:String) : void {

@@ -17,6 +17,7 @@ task :release => [:default] do
   web_dist = File.join(WEBSITE, 'public', 'tester')
   rm_rf web_dist
   cp_r BIN, web_dist
+  cp File.join(SRC, 'config.net.xml'), File.join(web_dist, 'config.xml')
   
   zip_file = "Fluorida-#{RELEASE_VERSION}.zip"
   rm_f zip_file
@@ -54,23 +55,10 @@ task :run => [:clean, :compile_tester, :compile_aut, :prepare_test] do
   run_flash "Tester"
 end
 
-task :full => [:clean, :compile_tester, :compile_aut, :prepare_test] do
+task :full => [:release] do
   cd WEBSITE do
-    execute "mongrel_rails start -d"
+    execute "rake fluorida"
   end
-  
-  successful = true
-  begin
-    run_flash "Tester"
-  rescue
-    successful = false;
-  end
-
-  cd WEBSITE do
-    execute "mongrel_rails stop"
-  end
-
-  raise "Test failed" unless successful
 end
 
 task :compile_tester do
