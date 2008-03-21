@@ -14,8 +14,8 @@ sample/test_regexp.flt
 sample/test_verify_element_present.flt
 sample/test_locators.flt
 sample/test_sleep.flt
-#sample/test_custom_component.flt
-#sample/test_style.flt
+sample/test_custom_component.flt
+sample/test_style.flt
 sample/test_popup.flt
 
 # it takes too long
