@@ -48,7 +48,7 @@ package {
 		}
 		
 		public function testLoadTestSuite() : void {
-			var testLoader:TestLoader = new TestLoader();
+			var testLoader:TestLoader = new TestLoader(".");
 			testLoader.addEventListener(Event.COMPLETE, addAsync(verifyTestLoader, 1000, {loader: testLoader}));
 			testLoader.load("sample/suite.fls");
 		}

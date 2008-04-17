@@ -11,20 +11,26 @@ require 'tasks/rails'
 
 REPORT_DIR = File.join(File.dirname(__FILE__), 'report')
 STATUS_FILE = File.join(REPORT_DIR, 'status')
+#BROWSER = '/cygdrive/c/Program\ Files/Internet\ Explorer/IEXPLORE.EXE'
+BROWSER = '/Applications/Firefox.app/Contents/MacOS/firefox'
 
 task :fluorida do
+  browser_cmd = "#{BROWSER} http://localhost:3000/tester/open?suite=default.fls"
   execute 'mongrel_rails start -d'
-  browser_cmd = '/cygdrive/c/Program\ Files/Internet\ Explorer/IEXPLORE.EXE http://localhost:3000/tester/open?suite=default.fls'
-  mkdir_p REPORT_DIR
-  File.open(STATUS_FILE, 'w'){|f| f.write 'testing'}
-  browser = Thread.new{ execute browser_cmd } 
-
-  while((status = File.open(STATUS_FILE){|f| f.read}) == 'testing') do
-    sleep 1
+  
+  begin
+    mkdir_p REPORT_DIR
+    File.open(STATUS_FILE, 'w'){|f| f.write 'testing'}
+    browser = Thread.new{ execute browser_cmd } 
+  
+    while((status = File.open(STATUS_FILE){|f| f.read}) == 'testing') do
+      sleep 1
+    end
+  
+    browser.exit
+  ensure
+    execute 'mongrel_rails stop'
   end
-
-  browser.exit
-  execute 'mongrel_rails stop'
   
   raise "Fluorida test failed!" unless status == 'successful'
 end

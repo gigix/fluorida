@@ -1,3 +1,7 @@
+def is_windows?
+  RUBY_PLATFORM.split("-")[1] == 'mswin32'
+end
+
 require 'rake'
 
 RELEASE_VERSION = '0.0.2'
@@ -8,7 +12,7 @@ TEST = 'test'
 LIB = File.join(TEST, 'lib')
 WEBSITE = 'website'
 COMPILER = 'mxmlc'
-RUNNER_NAME = 'sa_flashplayer_9_debug.exe'
+RUNNER_NAME = is_windows? ? 'sa_flashplayer_9_debug.exe' : 'FlashPlayer'
 RUNNER = File.join('.', RUNNER_NAME)
 
 task :default => [:clean, :compile_tester, :compile_aut, :prepare_test]
@@ -103,7 +107,7 @@ end
 def compile(name, src_dir = SRC)
   source = File.join(src_dir, name + '.mxml');
   target = File.join(BIN, name + '.swf');
-  option = "-use-network=true"
+  option = "-use-network=false"
   run_compile source, target, option
 end
 
@@ -113,7 +117,10 @@ end
 
 def check_flash_runner
   runner_url = "http://download.macromedia.com/pub/flashplayer/updaters/9/#{RUNNER_NAME}"
-  execute "wget #{runner_url}" unless File.exist? RUNNER
+  unless File.exist? RUNNER
+    execute "wget #{runner_url}" if is_windows?
+    raise "Please download appropriate flash player standalone and copy it here with the name '#{RUNNER_NAME}'" unless is_windows?
+  end
   chmod 0755, RUNNER
 end
 
@@ -124,7 +131,7 @@ def run_flash(name)
 end
 
 def run_compile(source, target, *options)
-    run_cmd COMPILER, source, options.join(' '), "-output #{target}"
+    run_cmd File.join(ENV['FLEX_HOME'], 'bin', COMPILER), source, options.join(' '), "-output #{target}"
 end
 
 def run_cmd cmd, *args
