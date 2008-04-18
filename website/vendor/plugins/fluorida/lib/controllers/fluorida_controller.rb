@@ -1,5 +1,9 @@
+require 'application'
+
 class FluoridaController < ApplicationController
-  REPORT_DIR = File.join RAILS_ROOT, 'report'
+  skip_before_filter :verify_authenticity_token
+  FLUORIDA_ROOT = File.join File.dirname(__FILE__), '..', '..'
+  REPORT_DIR = File.join FLUORIDA_ROOT, 'report'
   
   def report
     status = params[:status]
@@ -16,5 +20,12 @@ class FluoridaController < ApplicationController
 
   def open
     @suite_url = params[:suite]
+    render :file => File.join(File.dirname(__FILE__), '..', 'views', 'fluorida', 'open.rhtml')
+  end
+  
+  def load_file
+    file_path = File.join FLUORIDA_ROOT, params[:filename]
+    content = File.open(file_path){|f| f.read}
+    render :text => content
   end
 end
