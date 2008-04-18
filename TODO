@@ -11,8 +11,8 @@ CSS selector: children (done)
 Generate XML report (done)
 Post result to url specified in config.xml (done)
 Handle alerts (done)
+Rails plugin (done)
 
-Rails plugin
 Specify default suite url in config.xml
 CSS selectors:
 	descendant - refactor Selector first
