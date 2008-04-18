@@ -1,5 +1,4 @@
-class ResultController < ApplicationController
-  skip_before_filter :verify_authenticity_token  
+class FluoridaController < ApplicationController
   REPORT_DIR = File.join RAILS_ROOT, 'report'
   
   def report
@@ -13,5 +12,9 @@ class ResultController < ApplicationController
     File.open(status_file, 'w'){|f| f.write status }
         
     render :text => data
+  end
+
+  def open
+    @suite_url = params[:suite]
   end
 end

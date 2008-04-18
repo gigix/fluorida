@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class ResultControllerTest < ActionController::TestCase
+class FluoridaControllerTest < ActionController::TestCase
   def test_should_save_posted_result
-    report_dir = ResultController::REPORT_DIR
+    report_dir = FluoridaController::REPORT_DIR
     FileUtils.rm_rf report_dir
     
     data = "sample report"

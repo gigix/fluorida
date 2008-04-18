@@ -18,7 +18,7 @@ RUNNER = File.join('.', RUNNER_NAME)
 task :default => [:clean, :compile_tester, :compile_aut, :prepare_test]
 
 task :release => [:default] do
-  web_dist = File.join(WEBSITE, 'public', 'tester')
+  web_dist = File.join(WEBSITE, 'public', 'fluorida')
   rm_rf web_dist
   cp_r BIN, web_dist
   cp File.join(SRC, 'config.net.xml'), File.join(web_dist, 'config.xml')
