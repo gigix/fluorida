@@ -1,0 +1,2 @@
+module FluoridaHelper
+end
