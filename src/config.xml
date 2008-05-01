@@ -1,4 +1,3 @@
 <fluorida
-	postResultTo="http://localhost:3000/result/report"
 	baseUrl="."
 />

@@ -13,6 +13,13 @@ Post result to url specified in config.xml (done)
 Handle alerts (done)
 Rails plugin (done)
 
+Display all test cases/commands before run them
+Click to select test case
+Run current test case
+Click to create breakpoint
+Pause at breakpoint
+Resume after pause
+Step after pause
 Specify default suite url in config.xml
 CSS selectors:
 	descendant - refactor Selector first
@@ -21,8 +28,7 @@ CSS selectors:
 	...
 Specify "autorun" from containing HTML
 More indicative error message from verifyElementProperty
-Any more actions?
-Pause/resume/step/breakpoint
+Any other actions?
 
 ===== DEFECTS =====
 
