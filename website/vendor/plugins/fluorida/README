@@ -2,3 +2,4 @@
 2. Edit default.fls to specify your test cases
 3. script/server -etest
 4. Access http://localhost:3000/fluorida/open?suite=default.fls
+5. Check result in report directory
