@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:TabBar height="30" id="tabBar" itemClick="onMainMenuClick(event);" top="50" width="100%" dataProvider="{mainMenus}" labelField="label" tabWidth="90">
+	</mx:TabBar>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.ItemClickEvent;
+			[Bindable]
+			public var mainMenus:Array = [{label:'label A',name:'menu1'},{label:'label B',name:'menu2'},{label:'label C',name:'menu3'} ,{label:'label C',name:'menu4'}];
+			
+			private function onMainMenuClick(event:ItemClickEvent):void {
+				Alert.show( event.item.name );
+				
+			}
+			
+		]]>
+	</mx:Script>
+</mx:Application>
