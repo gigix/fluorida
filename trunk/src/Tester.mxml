@@ -69,36 +69,36 @@
 			}
         ]]>
 	</mx:Script>
-
-	<mx:HDividedBox id="controlPanel" width="100%" height="20%">
-		<mx:TextInput id="suiteUrl" width="80%" />
-		<mx:Button id="runSuite" width="20%" label="Run!" click="runCurrentSuite()" /> 
-	</mx:HDividedBox>
-
-	<mx:ProgressBar width="100%" trackHeight="12" name="progressBar" label="" mode="manual" />
+	<mx:TitleWindow width="100%" height="200">
+		<mx:HDividedBox id="controlPanel" width="100%" height="20%">
+			<mx:TextInput id="suiteUrl" width="80%" />
+			<mx:Button id="runSuite" width="20%" label="Run!" click="runCurrentSuite()" /> 
+		</mx:HDividedBox>
 	
-	<mx:HDividedBox name="testInfoBox" width="100%" height="100%">
-		<mx:TabNavigator id="testTabs" width="50%" height="100%" change="onTabChange()"
-			paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" creationPolicy="all">
-			<mx:Canvas label="Unsuccesful Tests" width="100%" height="100%">
-				<mx:List id="testFailures" width="100%" height="100%" borderStyle="none"
-						 change="onFailureSelected()" />
-			</mx:Canvas>
-			<mx:Canvas label="All Tests" width="100%" height="100%">
-				<mx:List id="allTests" width="100%" height="100%" borderStyle="none"
-						 change="onTestSelected()" />
-			</mx:Canvas>
-		</mx:TabNavigator>					
-		<mx:VBox width="50%" height="100%">
-			<mx:HBox width="100%" height="15" paddingBottom="0" 
-						paddingLeft="0" paddingRight="0" paddingTop="0">
-				<mx:Label text="Detail"></mx:Label>
-			</mx:HBox>				
-			<mx:TextArea id="detail" width="100%" height="100%" borderStyle="none" wordWrap="false" editable="false" />
-		</mx:VBox>				
-	</mx:HDividedBox>
+		<mx:ProgressBar width="100%" trackHeight="12" name="progressBar" label="" mode="manual" />
+		
+		<mx:HDividedBox name="testInfoBox" width="100%" height="100%">
+			<mx:TabNavigator id="testTabs" width="50%" height="100%" change="onTabChange()"
+				paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" creationPolicy="all">
+				<mx:Canvas label="Unsuccesful Tests" width="100%" height="100%">
+					<mx:List id="testFailures" width="100%" height="100%" borderStyle="none"
+							 change="onFailureSelected()" />
+				</mx:Canvas>
+				<mx:Canvas label="All Tests" width="100%" height="100%">
+					<mx:List id="allTests" width="100%" height="100%" borderStyle="none"
+							 change="onTestSelected()" />
+				</mx:Canvas>
+			</mx:TabNavigator>					
+			<mx:VBox width="50%" height="100%">
+				<mx:HBox width="100%" height="15" paddingBottom="0" 
+							paddingLeft="0" paddingRight="0" paddingTop="0">
+					<mx:Label text="Detail"></mx:Label>
+				</mx:HBox>				
+				<mx:TextArea id="detail" width="100%" height="100%" borderStyle="none" wordWrap="false" editable="false" />
+			</mx:VBox>				
+		</mx:HDividedBox>
+	</mx:TitleWindow>
 	
-	
-	<mx:SWFLoader name="aut" />
+	<mx:SWFLoader name="aut" width="100%" height="100%"/>
 
 </mx:Application>
