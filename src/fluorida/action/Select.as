@@ -1,16 +1,34 @@
 package fluorida.action {
-	import mx.controls.ComboBox;
-	import mx.events.DropdownEvent;
+	import flash.display.DisplayObject;
+	
 	import mx.events.ListEvent; 
 	
 	public class Select extends Action {
+		
 		protected override function doRun(args:Array) : void {
-			var dropdown:ComboBox = _accessor.$$(args[0]) as ComboBox;
-			dropdown.selectedIndex = parseInt(args[1]);
+			var dropDown : DisplayObject = _accessor.$$(args[0]);
 			
-			dropdown.dispatchEvent(new DropdownEvent(DropdownEvent.OPEN));
-			dropdown.dispatchEvent(new ListEvent(ListEvent.CHANGE));
-			dropdown.dispatchEvent(new DropdownEvent(DropdownEvent.CLOSE));
-		}	
+			var oldSelectedIndex : Number = ( dropDown as Object ).selectedIndex;
+			
+			if ( args[1] == "index" && dropDown.hasOwnProperty( "selectedIndex" ) )
+			{
+				( dropDown as Object ).selectedIndex = parseInt( args[2] );
+			} else {
+				var propertyName : String = args[1];
+				if ( dropDown.hasOwnProperty("numChildren") )
+					for ( var index : int = 0;  index < ( dropDown as Object ).numChildren; index++ )
+					{
+						var dropDownObject : Object = dropDown as Object ;
+						var selectedItem : Object = dropDownObject.getChindAt( index ) as Object;
+						if ( selectedItem.hasOwnProperty( propertyName ) && selectedItem[ propertyName ] == args[2] )
+						{
+							dropDownObject.selectedIndex = dropDownObject.getChildIndex( dropDownObject.getChindAt( index ) );
+						}
+					}
+			}
+			
+			if ( oldSelectedIndex != ( dropDown as Object ).selectedIndex ) 
+					dropDown.dispatchEvent( new ListEvent(ListEvent.CHANGE) );
+		}
 	}	
-}
+}	
