@@ -1,8 +1,8 @@
 package fluorida.framework {
 	import fluorida.action.Action;
+	import fluorida.action.CustomAction;
 	import fluorida.util.Accessor;
 	import fluorida.util.ArrayUtil;
-	import fluorida.util.WaitAndRun;
 	
 	public class TestCase {
 		private var _commands:Array = new Array();
@@ -11,6 +11,7 @@ package fluorida.framework {
 		private var _accessor:Accessor;
 		private var _result:TestResult;
 		private var _finished:Boolean = false;
+		private var _customActions : Object = new Object();
 		
 		public function TestCase(name:String) {
 			_name = name;
@@ -30,6 +31,15 @@ package fluorida.framework {
 		
 		public function getName() : String {
 			return _name;
+		}
+		
+		public function setCustomAction( actionName : String, customAction : CustomAction ) : void
+		{
+			this._customActions[ actionName ] = customAction;
+		}
+		
+		public function getCustomAction( actionName : String ) : CustomAction {
+			return this._customActions[ actionName ];
 		}
 		
 		public function addCommand(command:Command) : void {

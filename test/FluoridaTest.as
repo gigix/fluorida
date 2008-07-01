@@ -1,14 +1,17 @@
 package {
+	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
-    import flash.events.Event;
-    import flash.utils.getQualifiedClassName;
-
-    import flexunit.framework.TestCase;
-    import flexunit.framework.TestSuite;
+	import flash.utils.getQualifiedClassName;
+	
+	import flexunit.framework.TestCase;
+	import flexunit.framework.TestSuite;
 	
 	import fluorida.locator.Selector;
+	import fluorida.util.HeadFileImporter;
 	import fluorida.util.TestLoader;
+	
+	import mx.controls.Alert;
 	
 	public class FluoridaTest extends TestCase {
      	public function FluoridaTest(methodName:String) {
@@ -78,6 +81,7 @@ package {
 			matches = Selector.TYPE_SELECTOR_PATTERN.exec("VBox > Button[name='helloButton']");
 			assertEquals("VBox", matches[1]);
 			assertEquals("Button[name='helloButton']", matches[2]);
+			
 		}
 		
 		public function testCreateSelector() : void {

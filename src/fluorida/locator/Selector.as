@@ -5,7 +5,7 @@ package fluorida.locator {
 	import fluorida.util.ArrayUtil;
 
 	public class Selector {
-		public static var ATTRIBUTE_SELECTOR_PATTERN:RegExp = /^(\w+|\*)\[(\w+)=[\"|\'](.+)[\"|\']\]\s?>?\s*(.*)/;
+		public static var ATTRIBUTE_SELECTOR_PATTERN:RegExp = /^(\w+|\*)\[(\w+)=[\"|\'](.+?)[\"|\']\]\s?>?\s*(.*)/;
 		public static var TYPE_SELECTOR_PATTERN:RegExp = /^(\w+|\*)\s?>?\s*(.*)/;
 	
 		public static function parse(desc:String) : Selector {

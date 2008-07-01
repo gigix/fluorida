@@ -1,12 +1,13 @@
 package fluorida.util {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import mx.utils.StringUtil;
 	
+	import fluorida.action.CustomAction;
 	import fluorida.framework.Command;
-	import fluorida.framework.TestSuite;
 	import fluorida.framework.TestCase;
-	import fluorida.util.FileLoader;
+	import fluorida.framework.TestSuite;
+	
+	import mx.utils.StringUtil;
 	
 	public class TestLoader extends EventDispatcher {
 		private var _baseUrl:String;
@@ -52,14 +53,37 @@ package fluorida.util {
 		}
 		
 		private function loadTestCase(string:String) : void {
+			// TODO 
 			var testCase:TestCase = _cases.shift();
+			
 			var rows:Array = getUsefulRows(string);
-			for each(var row:String in rows) {
+			for ( var index : Number = 0; index < rows.length; index++) {
+				var row : String = rows[ index ];
 				var cmdArray:Array = row.split("|").map(trim).filter(notEmpty);
+				
 				var action:String = cmdArray.shift();
-				var args:Array = cmdArray;
-				var command:Command = new Command(action, args);
-				testCase.addCommand(command);
+				if ( action == "def" ) {
+					var defType : String =  cmdArray.shift();
+					if ( defType == "action" )
+					{
+						var actionName : String = cmdArray.shift();
+						var cAction : CustomAction = new CustomAction( cmdArray );
+						var actionCommandRow : String = rows[ ++index ];
+						while( actionCommandRow != "|end|" ) {
+							cAction.addCommandRowsString( actionCommandRow );
+							actionCommandRow = rows[ ++index ];
+						}
+						cAction.name = actionName;
+						testCase.setCustomAction( actionName, cAction );  
+					} 
+				} else if ( action == "import" ) {
+					var fileName : String = cmdArray.shift();
+					new HeadFileImporter( testCase ).load( getUrl( fileName ) );
+				} else {
+					var args:Array = cmdArray;
+					var command:Command = new Command(action, args);
+					testCase.addCommand(command);
+				}
 			}
 			
 			loadNextCase();
