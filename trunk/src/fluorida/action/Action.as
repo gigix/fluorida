@@ -1,13 +1,14 @@
 package fluorida.action {
+    import flash.errors.IllegalOperationError;
+    
+    import fluorida.framework.AssertionError;
+    import fluorida.framework.Command;
+    import fluorida.framework.TestCase;
+    import fluorida.util.Accessor;
+    import fluorida.util.WaitAndRun;
+    
     import mx.controls.Alert;
-	import flash.errors.IllegalOperationError;
-	
-	import fluorida.util.Accessor;
-	import fluorida.util.WaitAndRun;
-	import fluorida.framework.AssertionError;
-	import fluorida.framework.Command;
-	import fluorida.framework.TestCase;
-	import fluorida.framework.TestFailure;
+    import mx.utils.ObjectUtil;
 
 	public class Action {
 		private static function getActionMap() : Object {
@@ -37,11 +38,13 @@ package fluorida.action {
 		public static function create(test:TestCase, command:Command, accessor:Accessor, finishCallback:Function) : Action {
 			var actionName:String = command.getAction();
 			var action:Action = null;
-			if(!getActionMap().hasOwnProperty(actionName)) {
-				action = new Fail("We don't support this action yet: " + actionName);
-			} else {
+			if(getActionMap().hasOwnProperty(actionName)) {
 				var actionClass:Class = getActionMap()[actionName];
 				action = new actionClass();
+			} else if( test.getCustomAction( actionName ) ){
+				action = test.getCustomAction( actionName ).clone();
+			} else {
+				action = new Fail("We don't support this action yet: " + actionName);
 			}
 			
 			action.setTestCase(test);
@@ -59,6 +62,10 @@ package fluorida.action {
 		
 		private function setTestCase(test:TestCase) : void {
 			_test = test;
+		}
+		
+		protected function getTestCase() : TestCase {
+			return this._test;
 		}
 		
 		private function setArgs(args:Array) : void {

@@ -17,6 +17,8 @@ sample/test_sleep.flt
 sample/test_custom_component.flt
 sample/test_style.flt
 sample/test_popup.flt
+sample/test_tabbar.flt
+sample/test_tabbar_by_customaction.flt
 
 # it takes too long
 # sample/test_set_timeout.flt
