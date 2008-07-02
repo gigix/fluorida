@@ -29,7 +29,8 @@ package fluorida.util
 			var customActionStringArray : Array = splitToFunctons( _loader.data );
 			for each ( var customActionString : String in customActionStringArray ) {
 				var customAction : CustomAction = buildCustomActionByString( customActionString );
-				this._testCase.setCustomAction( customAction.name, customAction ); 
+				if ( customAction )
+					this._testCase.setCustomAction( customAction.name, customAction ); 
 			}
 		}
 		
@@ -40,25 +41,24 @@ package fluorida.util
 		
 		private function buildCustomActionByString( string : String ) : CustomAction {
 			var rows:Array = getUsefulRows(string);
-			var cmdArray:Array = row.split("|").map(trim).filter(notEmpty);
-			var cAction : CustomAction = new CustomAction( cmdArray );
+			var cmdArray:Array = rows[0].split("|").map(trim).filter(notEmpty);
 			var action:String = cmdArray.shift();
 			if ( action == "def" ) {
 				var defType : String =  cmdArray.shift();
-				if ( defType == "action" )
+				if ( defType == "action" ) {
 					var actionName : String = cmdArray.shift();
-					for ( var index : Number = 0; index < rows.length; index++) {
-						var row : String = rows[ index ];
-						while( actionCommandRow != "|end|" ) {
-							index++;
-							var actionCommandRow : String = rows[ index ];
+					var cAction : CustomAction = new CustomAction( cmdArray );
+					for ( var index : Number = 1; index < rows.length; index++) {
+						var actionCommandRow : String = rows[ index ];
+						if( actionCommandRow != "|end|" ) {
 							cAction.addCommandRowsString( actionCommandRow );
 						}
-						index++;
-						cAction.name = actionName;
 					}
+					cAction.name = actionName;
+					return cAction;
+				}
 			}
-			return cAction;
+			return null;
 		}
 		
 		private function getUsefulRows(content:String) : Array {
