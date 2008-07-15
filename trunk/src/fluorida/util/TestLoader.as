@@ -34,7 +34,7 @@ package fluorida.util {
 		
 		private function createSuite(data:String) : void {
 			_suite = new TestSuite(_suiteUrl);
-			_cases = getUsefulRows(data).map(createCase);
+			_cases = CommandStringUtil.getUsefulRows(data).map(createCase);
 
 			for each(var testCase:TestCase in _cases) {
 				_suite.addTestCase(testCase);
@@ -56,10 +56,10 @@ package fluorida.util {
 			// TODO 
 			var testCase:TestCase = _cases.shift();
 			
-			var rows:Array = getUsefulRows(string);
+			var rows:Array = CommandStringUtil.getUsefulRows(string);
 			for ( var index : Number = 0; index < rows.length; index++) {
 				var row : String = rows[ index ];
-				var cmdArray:Array = row.split("|").map(trim).filter(notEmpty);
+				var cmdArray:Array = CommandStringUtil.buildCommandArray( row );
 				
 				var action:String = cmdArray.shift();
 				if ( action == "def" ) {
@@ -88,22 +88,6 @@ package fluorida.util {
 			
 			loadNextCase();
 		}
-		
-		private function getUsefulRows(content:String) : Array {
-			return content.split("\n").map(trim).filter(notEmpty).filter(notComment);
-		}
-		
-		private function notEmpty(element:*, index:int, arr:Array) : Boolean {
-            return (element as String).length > 0;
-        }
-		
-		private function notComment(element:*, index:int, arr:Array) : Boolean {
-            return (element as String).charAt(0) != "#";
-        }
-		
-		private function trim(element:*, index:int, arr:Array) : String {
-            return StringUtil.trim(element as String);
-        }
 		
 		private function createCase(element:*, index:int, arr:Array) : TestCase {
             return new TestCase(element as String);
