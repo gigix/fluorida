@@ -1,8 +1,8 @@
 package fluorida.action
 {
 	import fluorida.framework.Command;
+	import fluorida.util.CommandStringUtil;
 	
-	import mx.utils.ObjectUtil;
 	import mx.utils.StringUtil;
 	
 	public class CustomAction extends Action
@@ -50,21 +50,13 @@ package fluorida.action
 			if ( this._runningCommandsStrings.length == 0 )
 				return;
 			var commandString : String = this._runningCommandsStrings.shift();
-			var cmdArray:Array = commandString.split("|").map(trim).filter(notEmpty);
+			var cmdArray:Array = CommandStringUtil.buildCommandArray( commandString );
 			var actionName:String = cmdArray.shift();
 			var args:Array = cmdArray;
 			var command : Command = new Command(actionName, args);
 			var action : Action = Action.create(this.getTestCase(), command, _accessor, runNextCommand);
 			action.run();
 		}
-		
-		private function notEmpty(element:*, index:int, arr:Array) : Boolean {
-            return (element as String).length > 0;
-        }
-		
-		private function trim(element:*, index:int, arr:Array) : String {
-            return StringUtil.trim(element as String);
-        }
         
 		private var _params : Array;
 		
