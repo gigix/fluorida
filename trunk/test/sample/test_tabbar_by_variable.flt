@@ -1,8 +1,8 @@
 |open|aut_tabbar.swf|
-|def|select_tabbar|$selector|$property|$value|
+|var|$selector|id="tabBar"|
+|var|$property|label|
+|var|$value|label B|
 |click|css=TabBar[$selector] > Tab[$property="$value"]|
-|end|
-|select_tabbar|id="tabBar"|label|label B|
 |sleep|1|
 |closePopup|ok|
 

@@ -5,13 +5,14 @@ package fluorida.framework {
 	import fluorida.util.ArrayUtil;
 	
 	public class TestCase {
-		private var _commands:Array = new Array();
-		private var _runningCommands:Array;
-		private var _name:String;
-		private var _accessor:Accessor;
-		private var _result:TestResult;
-		private var _finished:Boolean = false;
+		private var _commands : Array = new Array();
+		private var _runningCommands : Array;
+		private var _name : String;
+		private var _accessor : Accessor;
+		private var _result : TestResult;
+		private var _finished : Boolean = false;
 		private var _customActions : Object = new Object();
+		private var _variables : Array = new Array;
 		
 		public function TestCase(name:String) {
 			_name = name;
@@ -36,6 +37,15 @@ package fluorida.framework {
 		public function setCustomAction( actionName : String, customAction : CustomAction ) : void
 		{
 			this._customActions[ actionName ] = customAction;
+		}
+		
+		public function setVariable( variableName: String, value : String ) : void
+		{
+			this._variables[ variableName ] = value;
+		}
+		
+		public function get variables() : Array {
+			return this._variables;
 		}
 		
 		public function getCustomAction( actionName : String ) : CustomAction {
