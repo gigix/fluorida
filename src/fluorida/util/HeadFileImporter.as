@@ -7,12 +7,11 @@ package fluorida.util
 	import fluorida.action.CustomAction;
 	import fluorida.framework.TestCase;
 	
-	import mx.utils.StringUtil;
-	
 	public class HeadFileImporter
 	{
 		private var _testCase : TestCase;
 		private var _loader : URLLoader;
+		private var _completeCallback : Function;
 		
 		public function HeadFileImporter( testCase : TestCase ) {
 			this._testCase = testCase;
@@ -32,6 +31,12 @@ package fluorida.util
 				if ( customAction )
 					this._testCase.setCustomAction( customAction.name, customAction ); 
 			}
+			if( _completeCallback != null )
+				_completeCallback();
+		}
+		
+		public function set completeCallback( value : Function ) : void {
+			this._completeCallback = value;
 		}
 		
 		public function splitToFunctons( string : String ) : Array {
@@ -40,42 +45,9 @@ package fluorida.util
 		}
 		
 		private function buildCustomActionByString( string : String ) : CustomAction {
-			var rows:Array = getUsefulRows(string);
-			var cmdArray:Array = rows[0].split("|").map(trim).filter(notEmpty);
-			var action:String = cmdArray.shift();
-			if ( action == "def" ) {
-				var defType : String =  cmdArray.shift();
-				if ( defType == "action" ) {
-					var actionName : String = cmdArray.shift();
-					var cAction : CustomAction = new CustomAction( cmdArray );
-					for ( var index : Number = 1; index < rows.length; index++) {
-						var actionCommandRow : String = rows[ index ];
-						if( actionCommandRow != "|end|" ) {
-							cAction.addCommandRowsString( actionCommandRow );
-						}
-					}
-					cAction.name = actionName;
-					return cAction;
-				}
-			}
-			return null;
+			var rows:Array = CommandStringUtil.getUsefulRows( string );
+			return CommandStringUtil.buildCustomActionByUsefulRows( rows );
 		}
-		
-		private function getUsefulRows(content:String) : Array {
-			return content.split("\n").map(trim).filter(notEmpty).filter(notComment);
-		}
-		
-		private function notEmpty(element:*, index:int, arr:Array) : Boolean {
-            return (element as String).length > 0;
-        }
-		
-		private function notComment(element:*, index:int, arr:Array) : Boolean {
-            return (element as String).charAt(0) != "#";
-        }
-        
-        private function trim(element:*, index:int, arr:Array) : String {
-            return StringUtil.trim(element as String);
-        }
 		
 	}
 }
