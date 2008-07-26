@@ -21,6 +21,7 @@ sample/test_tabbar.flt
 sample/test_tabbar_by_customaction.flt
 sample/test_tabbar_by_import_headfile.flt
 sample/test_tabbar_by_variable.flt
+sample/test_tabbar_by_variable_failed.flt
 
 # it takes too long
 # sample/test_set_timeout.flt
