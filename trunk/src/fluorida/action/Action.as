@@ -8,11 +8,11 @@ package fluorida.action {
     import fluorida.util.WaitAndRun;
     
     import mx.controls.Alert;
-    import mx.utils.ObjectUtil;
 
 	public class Action {
 		private static function getActionMap() : Object {
 			return {
+				assertFailed:AssertFailed,
 				fail:Fail,
 				setTimeout:SetTimeout,
 				click:Click,
@@ -97,6 +97,11 @@ package fluorida.action {
 			} catch (error:Error) {
 				_test.addError(error);
 			}
+			new WaitAndRun(getSuccessIndicator(), _finishCallback, timeoutCallback);
+		}
+		
+		public function runOnly() : void {
+			doRun(_args);
 			new WaitAndRun(getSuccessIndicator(), _finishCallback, timeoutCallback);
 		}
 		
