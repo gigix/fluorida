@@ -32,6 +32,7 @@ package fluorida.util
 			_commandBuildFinished = false;
 			loadCommand();
 			new WaitAndRun(isCommandBuildFinished, loadNextCommand);
+			loadNextCommand();
 		}
 		
 		private function loadCommand() : void {

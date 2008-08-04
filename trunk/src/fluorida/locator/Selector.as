@@ -7,7 +7,8 @@ package fluorida.locator {
 	public class Selector {
 		public static var ATTRIBUTE_SELECTOR_PATTERN:RegExp = /^(\w+|\*)\[(\w+)=[\"|\'](.+?)[\"|\']\]\s?>?\s*(.*)/;
 		public static var TYPE_SELECTOR_PATTERN:RegExp = /^(\w+|\*)\s?>?\s*(.*)/;
-	
+		public static var ELEMENT_SELECTOR_PATTERN:RegExp = /^(\w+|\*)\s?{([^}]*)}\s?>?\s*(.*)/;
+			
 		public static function parse(desc:String) : Selector {
 			var simpleSelectorPattern:RegExp = /^\w+$/;
 			if(simpleSelectorPattern.test(desc)) {
@@ -31,11 +32,15 @@ package fluorida.locator {
 				matches = ATTRIBUTE_SELECTOR_PATTERN.exec(cssDesc);
 				selector = new AttributeSelector(matches[1], matches[2], matches[3]);
 				remainingDesc = matches[4];
+			} else if ( ELEMENT_SELECTOR_PATTERN.test( cssDesc ) ) {
+				matches = ELEMENT_SELECTOR_PATTERN.exec(cssDesc);
+				selector = new ElementSelector(matches[1], matches[2]);
+				remainingDesc = matches[3];
 			} else if(TYPE_SELECTOR_PATTERN.test(cssDesc)) {
 				matches = TYPE_SELECTOR_PATTERN.exec(cssDesc);
 				selector = new TypeSelector(matches[1]);
 				remainingDesc = matches[2];
-			}
+			} 
 			
 			if(selector == null) {
 				throw new Error("Invalid css selector description: " + cssDesc);

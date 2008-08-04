@@ -1,10 +1,10 @@
 package fluorida.framework {
-	import mx.core.Application;
-	
 	import fluorida.publisher.Publisher;
-    import fluorida.util.WaitAndRun;
-    import fluorida.util.Accessor;
-    import fluorida.util.ArrayUtil;
+	import fluorida.util.Accessor;
+	import fluorida.util.ArrayUtil;
+	import fluorida.util.WaitAndRun;
+	
+	import mx.core.Application;
     
 	public class TestSuite {
 		private var _testCases:Array = new Array();
