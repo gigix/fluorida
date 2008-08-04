@@ -1,0 +1,4 @@
+|def|select_datagrid|$selector|$textValue|
+|click|$selector > ListBaseContentHolder > *[text="$textValue"]|
+|select_listbase|$selector|$selector > ListBaseContentHolder > *[text="$textValue"]|
+|end|

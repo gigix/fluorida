@@ -1,6 +1,6 @@
 package fluorida.util {
-	import flash.utils.Timer;
 	import flash.events.TimerEvent;
+	import flash.utils.Timer;
 
 	public class WaitAndRun {
 		public static var defaultTimeout:int = 30;
@@ -19,7 +19,6 @@ package fluorida.util {
 			_timer = new Timer(100, timeout * 10);
 			_timer.addEventListener(TimerEvent.TIMER, check);
 			_timer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimeout);
-			
 			_timer.start();
 		}
 	

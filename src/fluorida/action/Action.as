@@ -13,25 +13,27 @@ package fluorida.action {
 		private static function getActionMap() : Object {
 			return {
 				assertFailed:AssertFailed,
-				fail:Fail,
 				setTimeout:SetTimeout,
 				click:Click,
 				clickAt:ClickAt,
+				closePopup:ClosePopup,
+				call:Call,
 				doubleClick:DoubleClick,
-				type:Type,
-				select:Select,
+				dragAndDrop:DragAndDrop,
+				fail:Fail,
 				mouseOver:MouseOver,
 				mouseOut:MouseOut,
-				dragAndDrop:DragAndDrop,
-				closePopup:ClosePopup,
+				open:Open,
+				select:Select,
+				select_listbase:Select_LisBase,
 				sleep:Sleep,
-				waitForElementProperty:WaitForElementProperty,
+				type:Type,
 				verifyElementProperty:VerifyElementProperty,
 				verifyText:VerifyText,
 				verifyStyle:VerifyStyle,
 				verifyElementPresent:VerifyElementPresent,
-				waitForElementPresent:WaitForElementPresent,
-				open:Open
+				waitForElementProperty:WaitForElementProperty,
+				waitForElementPresent:WaitForElementPresent
 			};
 		}
 		

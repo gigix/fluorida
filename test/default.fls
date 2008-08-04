@@ -22,6 +22,9 @@ sample/test_tabbar_by_customaction.flt
 sample/test_tabbar_by_import_headfile.flt
 sample/test_tabbar_by_variable.flt
 sample/test_tabbar_by_variable_failed.flt
+sample/test_datagrid_select_item.flt
+sample/test_list_select_item.flt
+
 
 # it takes too long
 # sample/test_set_timeout.flt

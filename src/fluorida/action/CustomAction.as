@@ -3,8 +3,6 @@ package fluorida.action
 	import fluorida.framework.Command;
 	import fluorida.util.CommandStringUtil;
 	
-	import mx.utils.StringUtil;
-	
 	public class CustomAction extends Action
 	{
 		public function CustomAction( params : Array )
@@ -43,20 +41,37 @@ package fluorida.action
 				this._runningCommandsStrings.push( preparedRowCommandString );
 			} 	
 			
-			runNextCommand();
+			runRealActions();
 		}
 		
 		private function runNextCommand() : void {
 			if ( this._runningCommandsStrings.length == 0 )
 				return;
-			var commandString : String = this._runningCommandsStrings.shift();
+			var commandString : String = this._runningCommandsStrings[0];
 			var cmdArray:Array = CommandStringUtil.buildCommandArray( commandString );
 			var actionName:String = cmdArray.shift();
-			var args:Array = cmdArray;
-			var command : Command = new Command(actionName, args);
-			var action : Action = Action.create(this.getTestCase(), command, _accessor, runNextCommand);
+			var command : Command = new Command(actionName, cmdArray);
+			var action : Action = Action.create(this.getTestCase(), command, _accessor, runRealActions);
 			action.run();
 		}
+		
+		private function runRealActions() : void {
+			if ( this._runningCommandsStrings.length == 0 ) {
+				this._isFinished = true;
+			}
+			runNextCommand();
+			this._runningCommandsStrings.shift();
+			
+			
+		}
+		
+		protected override function getSuccessIndicator() : Function {
+			return this.isFinished;	
+		}
+        
+        private function isFinished() : Boolean {
+        	return _isFinished;
+        }
         
 		private var _params : Array;
 		
@@ -64,7 +79,9 @@ package fluorida.action
 		
 		private var _commandRowsStrings : Array;
 		
-		private var _name : String
+		private var _name : String;
+		
+		private var _isFinished = false;
 		
 	}
 }

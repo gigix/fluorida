@@ -1,0 +1,4 @@
+|def|select_list|$selector|$textValue|
+|click|$selector > ListBaseContentHolder > * >UITextField[text="$textValue"]|
+|select_listbase|$selector|$selector > ListBaseContentHolder > *{css=UITextField[text="$textValue"]}|
+|end|
