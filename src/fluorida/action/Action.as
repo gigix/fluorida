@@ -21,6 +21,7 @@ package fluorida.action {
 				doubleClick:DoubleClick,
 				dragAndDrop:DragAndDrop,
 				fail:Fail,
+				"import":Import,
 				mouseOver:MouseOver,
 				mouseOut:MouseOut,
 				open:Open,

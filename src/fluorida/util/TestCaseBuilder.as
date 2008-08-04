@@ -40,41 +40,37 @@ package fluorida.util
 			var cmdArray:Array = CommandStringUtil.buildCommandArray( row );
 			
 			var action:String = cmdArray.shift();
-			if ( action == "import" ) {
-				var fileName : String = cmdArray.shift();
-				var headFileImporter : HeadFileImporter = new HeadFileImporter( _testCase );
-				headFileImporter.completeCallback = buildCommandSuccess;
-				headFileImporter.load( _baseUrl + "/" + fileName  );
-			} else {
-				if ( action == "def" ) {
-					var actionName : String = cmdArray.shift();
-					var defUsefulRows : Array = new Array;
-					while( ( rows[ _index ] as String ).indexOf( "|end|" ) != 0 ) {
-						defUsefulRows.push( rows[ _index++ ] );
-					}
-					defUsefulRows.push( rows[ _index ] );
-					_testCase.setCustomAction( actionName, CommandStringUtil.buildCustomActionByUsefulRows(defUsefulRows) );  
-				} else if ( action == "var") {
-					// TODO
-					_testCase.setVariable( cmdArray.shift(), cmdArray.shift() );
-				}else {
-					var args:Array = new Array;
-					for ( var cmdIndex : Number = 0; cmdIndex < cmdArray.length; cmdIndex++ )
-					{
-						var cmd : String = cmdArray[ cmdIndex ];
-						for ( var variableName : String in _testCase.variables ) 
-						{
-							 cmd = cmd.replace(new RegExp(  "\\" + variableName, "g" ), 
-														_testCase.variables[ variableName ] 
-														);
-						}
-						args.push( cmd );
-					}	
-					var command:Command = new Command(action, args);
-					_testCase.addCommand(command);
+			if ( action == "def" ) {
+				var actionName : String = cmdArray.shift();
+				var defUsefulRows : Array = new Array;
+				while( ( rows[ _index ] as String ).indexOf( "|end|" ) != 0 ) {
+					defUsefulRows.push( rows[ _index++ ] );
 				}
-				buildCommandSuccess();
+				defUsefulRows.push( rows[ _index ] );
+				_testCase.setCustomAction( actionName, CommandStringUtil.buildCustomActionByUsefulRows(defUsefulRows) );  
+			} else if ( action == "var") {
+				// TODO
+				_testCase.setVariable( cmdArray.shift(), cmdArray.shift() );
+			}else {
+				var args:Array = new Array;
+				for ( var cmdIndex : Number = 0; cmdIndex < cmdArray.length; cmdIndex++ )
+				{
+					var cmd : String = cmdArray[ cmdIndex ];
+					for ( var variableName : String in _testCase.variables ) 
+					{
+						 cmd = cmd.replace(new RegExp(  "\\" + variableName, "g" ), 
+													_testCase.variables[ variableName ] 
+													);
+					}
+					args.push( cmd );
+				}	
+				if ( action == "import" ) {
+					args.push(_baseUrl);
+				}
+				var command:Command = new Command(action, args);
+				_testCase.addCommand(command);
 			}
+			buildCommandSuccess();
 			_index++;
 		}
 		

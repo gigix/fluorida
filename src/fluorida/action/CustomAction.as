@@ -81,7 +81,7 @@ package fluorida.action
 		
 		private var _name : String;
 		
-		private var _isFinished = false;
+		private var _isFinished : Boolean = false;
 		
 	}
 }
