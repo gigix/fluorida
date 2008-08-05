@@ -8,7 +8,6 @@ package fluorida.action
 	public class Assign extends Action
 	{
 		protected override function doRun(args:Array) : void {
-			trace("running Assign");
 			var locator:String = args.shift();
 			var selectedObject : DisplayObject = _accessor.$$(locator);
 			var assignedPropertyExp : String = args.shift();
