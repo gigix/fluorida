@@ -11,6 +11,23 @@ package fluorida.util
 		}
 		
 		public static function buildCommandArray( commandString : String ) : Array {
+//			var beginIndex : int = commandString.indexOf( "|" ) + 1;
+//			var endIndex : int = 0;
+//			var result : Array = new Array;
+//			while( beginIndex != commandString.length )
+//			{
+//				if( commandString.indexOf( "|{", endIndex ) + 1 == beginIndex)
+//				{
+//					endIndex = commandString.indexOf( "}|", beginIndex ) + 1;
+//					result.push( commandString.substring( beginIndex, endIndex ) );
+//					beginIndex =  endIndex + 2;
+//				} else {
+//					endIndex = commandString.indexOf( "|", beginIndex + 1 );
+//					result.push( commandString.substring( beginIndex, endIndex ) );
+//					beginIndex =  endIndex + 1;
+//				}
+//				
+//			}
 			return commandString.split("|").map(trim).filter(notEmpty);
 		}
 		
