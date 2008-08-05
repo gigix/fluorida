@@ -12,6 +12,7 @@ package fluorida.action {
 	public class Action {
 		private static function getActionMap() : Object {
 			return {
+				assign:Assign,
 				assertFailed:AssertFailed,
 				setTimeout:SetTimeout,
 				click:Click,
@@ -26,7 +27,7 @@ package fluorida.action {
 				mouseOut:MouseOut,
 				open:Open,
 				select:Select,
-				select_listbase:Select_LisBase,
+//				select_listbase:Select_LisBase,
 				sleep:Sleep,
 				type:Type,
 				verifyElementProperty:VerifyElementProperty,
